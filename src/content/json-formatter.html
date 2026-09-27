@@ -1,0 +1,17 @@
+<div class="tool-widget">
+  <div class="form-row">
+    <label for="jf-input">Paste your JSON</label>
+    <textarea id="jf-input" spellcheck="false" placeholder='{"hello":"world","items":[1,2,3]}'></textarea>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn" id="jf-format" type="button">Format</button>
+    <button class="btn btn-secondary" id="jf-minify" type="button">Minify</button>
+    <button class="btn btn-secondary" id="jf-validate" type="button">Validate</button>
+    <button class="btn btn-secondary" id="jf-copy" type="button">Copy</button>
+  </div>
+  <p class="note" id="jf-status"></p>
+  <div class="form-row" style="margin-top:14px">
+    <label for="jf-output">Output</label>
+    <textarea id="jf-output" spellcheck="false" readonly></textarea>
+  </div>
+</div>

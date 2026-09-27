@@ -1,0 +1,419 @@
+{
+  "site": {
+    "name": "Muexe",
+    "tagline": "Free Online Tools",
+    "url": "https://muexe.com",
+    "title": "Free Online Tools — Image, PDF, Calculator & Developer Tools | Muexe",
+    "description": "Muexe offers 100% free online tools: convert images to PDF, compress and resize photos, calculate BMI or mortgage, format JSON and more. No sign-up, works in your browser.",
+    "keywords": "free online tools, web tools, image to pdf, image compressor, json formatter, bmi calculator, mortgage calculator, word counter"
+  },
+  "categories": [
+    {
+      "key": "converters",
+      "label": "Converters"
+    },
+    {
+      "key": "image",
+      "label": "Image Tools"
+    },
+    {
+      "key": "calculators",
+      "label": "Calculators"
+    },
+    {
+      "key": "text",
+      "label": "Text & Developer"
+    }
+  ],
+  "tools": [
+    {
+      "slug": "image-to-pdf",
+      "name": "Image to PDF Converter",
+      "icon": "🖼️",
+      "category": "converters",
+      "title": "Image to PDF Converter – Free Online Tool | Muexe",
+      "description": "Convert JPG, PNG and WebP images to a single PDF online for free. No sign-up, no upload to server — your files stay private and never leave your browser.",
+      "keywords": "image to pdf, jpg to pdf, convert image to pdf, picture to pdf, free image to pdf converter",
+      "short_desc": "Turn JPG, PNG or WebP images into one polished PDF — free and private.",
+      "lead": "Convert your images into a clean, shareable PDF in seconds. Combine multiple images into one document, reorder pages, and download — all locally in your browser.",
+      "features": [
+        "Supports JPG, PNG and WebP input",
+        "Combine multiple images into a single PDF",
+        "100% private — files never leave your device"
+      ],
+      "how_to_use": [
+        "Click “Choose Images” and select one or more image files.",
+        "Drag to reorder pages if needed.",
+        "Click “Convert to PDF” and download your file."
+      ],
+      "faq": [
+        {
+          "q": "Is this Image to PDF converter really free?",
+          "a": "Yes. It is completely free with no hidden limits, no watermarks and no account required."
+        },
+        {
+          "q": "Are my images uploaded to a server?",
+          "a": "No. Everything runs locally in your browser using JavaScript, so your images never leave your device."
+        },
+        {
+          "q": "Which image formats are supported?",
+          "a": "You can convert JPG, PNG and WebP images. Other formats are converted automatically by your browser when possible."
+        },
+        {
+          "q": "Can I merge multiple images into one PDF?",
+          "a": "Yes. Add several images and they are combined into a single multi-page PDF in the order you choose."
+        }
+      ]
+    },
+    {
+      "slug": "jpg-to-png",
+      "name": "JPG to PNG Converter",
+      "icon": "🔄",
+      "category": "converters",
+      "title": "JPG to PNG Converter – Free Online Tool | Muexe",
+      "description": "Convert JPG images to PNG online for free. Get transparent-capable, lossless PNG files in one click — fully private, no upload, no watermark.",
+      "keywords": "jpg to png, convert jpg to png, jpeg to png converter, free jpg to png",
+      "short_desc": "Convert JPG photos to crisp PNG files in one click, right in your browser.",
+      "lead": "Convert JPG (JPEG) images to the PNG format instantly. PNG is ideal when you need higher quality or want to preserve details without compression artifacts.",
+      "features": [
+        "Instant conversion with no waiting",
+        "Lossless PNG output for maximum quality",
+        "No upload — processed locally for privacy"
+      ],
+      "how_to_use": [
+        "Click “Choose Image” and pick a JPG file.",
+        "Preview the converted PNG instantly.",
+        "Click “Download PNG” to save it."
+      ],
+      "faq": [
+        {
+          "q": "Why convert JPG to PNG?",
+          "a": "PNG uses lossless compression, so it preserves sharp edges and text better than JPG. It also supports transparency."
+        },
+        {
+          "q": "Does the converter reduce image quality?",
+          "a": "No. Converting to PNG does not introduce JPG-style artifacts; your image is saved losslessly."
+        },
+        {
+          "q": "Is my image uploaded anywhere?",
+          "a": "No, conversion happens entirely in your browser. Your image never leaves your device."
+        }
+      ]
+    },
+    {
+      "slug": "image-compressor",
+      "name": "Image Compressor",
+      "icon": "🗜️",
+      "category": "image",
+      "title": "Image Compressor – Compress JPG & PNG Online Free | Muexe",
+      "description": "Compress JPG, PNG and WebP images online for free while keeping quality. Reduce file size for websites, email and social media — private and fast.",
+      "keywords": "compress image, image compressor, reduce image size, compress jpg, compress png, optimize images",
+      "short_desc": "Shrink image file size without visible quality loss — perfect for web and email.",
+      "lead": "Reduce the file size of your images while keeping them looking great. Choose a quality level and download an optimized version — smaller files load faster and save storage.",
+      "features": [
+        "Adjustable quality slider for size vs. clarity",
+        "Live preview of file size before and after",
+        "Runs locally — no upload, no privacy risk"
+      ],
+      "how_to_use": [
+        "Choose an image from your device.",
+        "Drag the quality slider to balance size and quality.",
+        "Download the compressed image."
+      ],
+      "faq": [
+        {
+          "q": "How much can I compress an image?",
+          "a": "It depends on the source. Most photos can be reduced by 50–80% with little visible difference."
+        },
+        {
+          "q": "Will compression reduce image dimensions?",
+          "a": "No. The compressor reduces file size (bytes) while keeping the same pixel dimensions."
+        },
+        {
+          "q": "Is it safe to compress sensitive images?",
+          "a": "Yes. Processing happens entirely in your browser, so files are never uploaded to a server."
+        }
+      ]
+    },
+    {
+      "slug": "image-resizer",
+      "name": "Image Resizer",
+      "icon": "📐",
+      "category": "image",
+      "title": "Image Resizer – Resize Images Online Free | Muexe",
+      "description": "Resize images online for free by pixels or percentage. Scale JPG, PNG and WebP to exact dimensions for social media, websites and print — no upload.",
+      "keywords": "resize image, image resizer, change image size, resize photo online, image resize tool",
+      "short_desc": "Resize images to exact pixel dimensions for social media, web or print.",
+      "lead": "Change an image's dimensions by entering exact pixel values or a percentage. Ideal for matching social media sizes, thumbnails, avatars and print requirements.",
+      "features": [
+        "Resize by pixels or percentage",
+        "Lock aspect ratio to avoid distortion",
+        "Processed in your browser — fully private"
+      ],
+      "how_to_use": [
+        "Upload an image.",
+        "Enter new width and height, or a percentage.",
+        "Download the resized image."
+      ],
+      "faq": [
+        {
+          "q": "Can I resize without distorting the image?",
+          "a": "Yes. Enable “Keep aspect ratio” and set one dimension — the other adjusts automatically."
+        },
+        {
+          "q": "Which formats are supported?",
+          "a": "JPG, PNG and WebP can be resized and exported."
+        },
+        {
+          "q": "Does resizing lower image quality?",
+          "a": "Downscaling keeps quality high. Upscaling beyond the original size may look softer."
+        }
+      ]
+    },
+    {
+      "slug": "bmi-calculator",
+      "name": "BMI Calculator",
+      "icon": "⚖️",
+      "category": "calculators",
+      "title": "BMI Calculator – Free Body Mass Index Tool | Muexe",
+      "description": "Calculate your Body Mass Index (BMI) for free using your height and weight. Understand your category and healthy weight range instantly, in metric or imperial units.",
+      "keywords": "bmi calculator, body mass index, bmi chart, calculate bmi, healthy weight",
+      "short_desc": "Find your Body Mass Index and healthy weight range in seconds.",
+      "lead": "Calculate your Body Mass Index (BMI) and see which weight category you fall into. BMI is a simple screening tool used to estimate whether you are in a healthy weight range.",
+      "features": [
+        "Metric and imperial unit support",
+        "Instant category and healthy-range results",
+        "Clear visual gauge of your result"
+      ],
+      "how_to_use": [
+        "Enter your height and weight.",
+        "Choose metric or imperial units.",
+        "Read your BMI value and weight category."
+      ],
+      "faq": [
+        {
+          "q": "What is a healthy BMI?",
+          "a": "For most adults, a BMI between 18.5 and 24.9 is considered a healthy weight range."
+        },
+        {
+          "q": "Is BMI accurate for everyone?",
+          "a": "BMI is a general screening tool and does not account for muscle mass, age or body composition. Consult a health professional for a full assessment."
+        },
+        {
+          "q": "Which units can I use?",
+          "a": "You can use metric (kg / cm) or imperial (lb / ft + in) units."
+        }
+      ]
+    },
+    {
+      "slug": "mortgage-calculator",
+      "name": "Mortgage Calculator",
+      "icon": "🏠",
+      "category": "calculators",
+      "title": "Mortgage Calculator – Free Home Loan Payment Tool | Muexe",
+      "description": "Estimate your monthly mortgage payment with our free calculator. Includes principal, interest, property tax, insurance and a full amortization breakdown.",
+      "keywords": "mortgage calculator, mortgage payment, home loan calculator, monthly mortgage, amortization",
+      "short_desc": "Estimate monthly payments and total interest for any home loan.",
+      "lead": "Estimate your monthly mortgage payment and see how much interest you'll pay over the life of the loan. Adjust loan amount, interest rate and term to compare scenarios.",
+      "features": [
+        "Includes tax, insurance and extra payments",
+        "Full amortization breakdown",
+        "Instantly compare loan terms"
+      ],
+      "how_to_use": [
+        "Enter loan amount, interest rate and term.",
+        "Optionally add tax, insurance and extra monthly payments.",
+        "View your monthly payment and total interest."
+      ],
+      "faq": [
+        {
+          "q": "What is included in the monthly payment?",
+          "a": "The calculator can include principal, interest, property tax and homeowners insurance, plus optional extra payments."
+        },
+        {
+          "q": "Does this calculator consider extra payments?",
+          "a": "Yes. Add an optional extra monthly payment to see how much interest you save and how the payoff date changes."
+        },
+        {
+          "q": "Is this a substitute for a lender's quote?",
+          "a": "No. Results are estimates only. Actual terms depend on your lender, credit and other factors."
+        }
+      ]
+    },
+    {
+      "slug": "date-calculator",
+      "name": "Date Calculator",
+      "icon": "📅",
+      "category": "calculators",
+      "title": "Date Calculator – Add & Subtract Days Online Free | Muexe",
+      "description": "Add or subtract days, weeks, months or years from any date, or find the exact number of days between two dates. Free, instant and easy to use.",
+      "keywords": "date calculator, add days to date, days between dates, date difference calculator, date math",
+      "short_desc": "Add or subtract days, or count the days between two dates.",
+      "lead": "Quickly add or subtract days, weeks, months or years from a date, or calculate the exact number of days between two dates — perfect for deadlines, events and planning.",
+      "features": [
+        "Add or subtract days, weeks, months and years",
+        "Count days between two dates",
+        "Handles leap years automatically"
+      ],
+      "how_to_use": [
+        "Pick a start date.",
+        "Add/subtract a period, or select a second date.",
+        "See the result date or the day difference instantly."
+      ],
+      "faq": [
+        {
+          "q": "Does the date calculator account for leap years?",
+          "a": "Yes, leap years are handled automatically for accurate results."
+        },
+        {
+          "q": "Can I calculate business days?",
+          "a": "This tool calculates calendar days. For business days, add a buffer manually."
+        },
+        {
+          "q": "What date ranges are supported?",
+          "a": "Any valid date from year 1 to 9999 is supported."
+        }
+      ]
+    },
+    {
+      "slug": "json-formatter",
+      "name": "JSON Formatter & Validator",
+      "icon": "🧩",
+      "category": "text",
+      "title": "JSON Formatter & Validator – Free Online Tool | Muexe",
+      "description": "Format, validate and beautify JSON online for free. Minify JSON, fix errors and find mistakes instantly with our fast browser-based JSON editor.",
+      "keywords": "json formatter, json validator, format json, json beautifier, json minify, pretty print json",
+      "short_desc": "Beautify, validate and minify JSON instantly with clear error hints.",
+      "lead": "Paste messy JSON and get it formatted, validated and beautified in milliseconds. Spot errors instantly and minify your data for production use.",
+      "features": [
+        "Instant formatting and validation",
+        "Clear error messages with position hints",
+        "Minify and copy with one click"
+      ],
+      "how_to_use": [
+        "Paste your JSON into the input box.",
+        "Click “Format” to beautify, or “Validate” to check for errors.",
+        "Copy or download the result."
+      ],
+      "faq": [
+        {
+          "q": "What does the JSON formatter do?",
+          "a": "It turns compact or messy JSON into clean, indented, human-readable text and checks for syntax errors."
+        },
+        {
+          "q": "Is my JSON data uploaded anywhere?",
+          "a": "No. All parsing and formatting happen locally in your browser."
+        },
+        {
+          "q": "Can I minify JSON too?",
+          "a": "Yes. Use the Minify button to compress JSON to a single line for production."
+        }
+      ]
+    },
+    {
+      "slug": "word-counter",
+      "name": "Word Counter",
+      "icon": "🔢",
+      "category": "text",
+      "title": "Word Counter – Count Words & Characters Online Free | Muexe",
+      "description": "Count words, characters, sentences and paragraphs instantly with our free online word counter. Track reading and speaking time for any text.",
+      "keywords": "word counter, character counter, count words, word count online, character count, text counter",
+      "short_desc": "Count words, characters, sentences and reading time instantly.",
+      "lead": "Paste or type your text to count words, characters, sentences and paragraphs in real time. Also see estimated reading and speaking time — useful for essays, articles and social posts.",
+      "features": [
+        "Real-time word and character counts",
+        "Sentence, paragraph and line stats",
+        "Estimated reading and speaking time"
+      ],
+      "how_to_use": [
+        "Type or paste your text into the box.",
+        "View live counts of words, characters and more.",
+        "Copy or clear the text as needed."
+      ],
+      "faq": [
+        {
+          "q": "How are words counted?",
+          "a": "Words are counted as groups of characters separated by spaces and punctuation."
+        },
+        {
+          "q": "Does it count characters with or without spaces?",
+          "a": "Both. The tool reports character count with and without spaces."
+        },
+        {
+          "q": "Is my text stored anywhere?",
+          "a": "No. Everything is processed in your browser and never uploaded."
+        }
+      ]
+    },
+    {
+      "slug": "case-converter",
+      "name": "Case Converter",
+      "icon": "🔠",
+      "category": "text",
+      "title": "Case Converter – Convert Text Case Online Free | Muexe",
+      "description": "Convert text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase and more. Free online text case converter — copy-ready in one click.",
+      "keywords": "case converter, text case converter, uppercase to lowercase, title case, sentence case, camel case",
+      "short_desc": "Switch text between UPPERCASE, lowercase, Title Case and more.",
+      "lead": "Convert any text between uppercase, lowercase, title case, sentence case, camelCase, PascalCase and more. Perfect for fixing caps, writing headlines and formatting code.",
+      "features": [
+        "Multiple case styles in one click",
+        "Instant, live conversion",
+        "Copy and clear with one click"
+      ],
+      "how_to_use": [
+        "Paste your text into the input.",
+        "Choose a case style from the options.",
+        "Copy the converted text."
+      ],
+      "faq": [
+        {
+          "q": "Which case styles are supported?",
+          "a": "UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case and kebab-case."
+        },
+        {
+          "q": "Will it change numbers and punctuation?",
+          "a": "No, numbers and punctuation are preserved and only letters are transformed."
+        },
+        {
+          "q": "Is my text uploaded anywhere?",
+          "a": "No, conversion runs entirely in your browser."
+        }
+      ]
+    },
+    {
+      "slug": "percentage-calculator",
+      "name": "Percentage Calculator",
+      "icon": "％",
+      "category": "calculators",
+      "title": "Percentage Calculator – Free Online Tool | Muexe",
+      "description": "Percentage Calculator online for free. Fast, private and easy to use — works right in your browser with no sign-up or download required.",
+      "keywords": "percentage calculator, free percentage calculator, online percentage calculator, percentage calculator tool",
+      "short_desc": "Find percentages, increases and decreases in one click.",
+      "lead": "Use our free Percentage Calculator instantly in your browser. No sign-up, no upload — your data never leaves your device.",
+      "features": [
+        "Instant results with no waiting",
+        "100% free with no sign-up required",
+        "Runs locally — your data never leaves your device"
+      ],
+      "how_to_use": [
+        "Enter your input in the box.",
+        "Click the button to run the tool.",
+        "Copy or download the result."
+      ],
+      "faq": [
+        {
+          "q": "Is this Percentage Calculator really free?",
+          "a": "Yes. It is completely free with no hidden limits and no account required."
+        },
+        {
+          "q": "Is my data uploaded to a server?",
+          "a": "No. Everything runs locally in your browser, so your data never leaves your device."
+        },
+        {
+          "q": "Does it work on mobile?",
+          "a": "Yes, the tool works on any device with a modern browser — desktop, tablet or phone."
+        }
+      ]
+    }
+  ]
+}

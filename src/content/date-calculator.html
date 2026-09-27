@@ -1,0 +1,49 @@
+<div class="tool-widget">
+  <div class="form-row">
+    <label for="dc-mode">Mode</label>
+    <select id="dc-mode">
+      <option value="add">Add / subtract from a date</option>
+      <option value="between">Days between two dates</option>
+    </select>
+  </div>
+
+  <div id="dc-add">
+    <div class="form-row">
+      <label for="dc-date">Start date</label>
+      <input type="date" id="dc-date">
+    </div>
+    <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div><label for="dc-num">Amount</label><input type="number" id="dc-num" value="1" min="0"></div>
+      <div>
+        <label for="dc-unit">Unit</label>
+        <select id="dc-unit">
+          <option value="days">Days</option>
+          <option value="weeks">Weeks</option>
+          <option value="months">Months</option>
+          <option value="years">Years</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <label for="dc-op">Operation</label>
+      <select id="dc-op">
+        <option value="add">Add (+)</option>
+        <option value="sub">Subtract (−)</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="dc-between" style="display:none">
+    <div class="form-row">
+      <label for="dc-date1">From date</label>
+      <input type="date" id="dc-date1">
+    </div>
+    <div class="form-row">
+      <label for="dc-date2">To date</label>
+      <input type="date" id="dc-date2">
+    </div>
+  </div>
+
+  <button class="btn" id="dc-calc" type="button">Calculate</button>
+  <div class="result-box" id="dc-result" style="display:none"></div>
+</div>

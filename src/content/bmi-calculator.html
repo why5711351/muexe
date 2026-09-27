@@ -1,0 +1,31 @@
+<div class="tool-widget">
+  <div class="form-row">
+    <label for="bmi-unit">Unit system</label>
+    <select id="bmi-unit">
+      <option value="metric">Metric (kg / cm)</option>
+      <option value="imperial">Imperial (lb / ft+in)</option>
+    </select>
+  </div>
+  <div id="bmi-metric">
+    <div class="form-row">
+      <label for="bmi-hcm">Height (cm)</label>
+      <input type="number" id="bmi-hcm" placeholder="e.g. 175" min="1">
+    </div>
+    <div class="form-row">
+      <label for="bmi-wkg">Weight (kg)</label>
+      <input type="number" id="bmi-wkg" placeholder="e.g. 70" min="1">
+    </div>
+  </div>
+  <div id="bmi-imperial" style="display:none">
+    <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div><label for="bmi-hft">Height (ft)</label><input type="number" id="bmi-hft" placeholder="5" min="0"></div>
+      <div><label for="bmi-hin">Height (in)</label><input type="number" id="bmi-hin" placeholder="9" min="0"></div>
+    </div>
+    <div class="form-row">
+      <label for="bmi-wlb">Weight (lb)</label>
+      <input type="number" id="bmi-wlb" placeholder="e.g. 154" min="1">
+    </div>
+  </div>
+  <button class="btn" id="bmi-calc" type="button">Calculate BMI</button>
+  <div class="result-box" id="bmi-result" style="display:none"></div>
+</div>

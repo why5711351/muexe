@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Build output — Cloudflare Pages builds dist/ from source
+dist/
+
+# Local environment
+venv/
+.env
+.venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.tmp
+
+# Scratch files
+env.txt
+check.txt
+smoke.txt

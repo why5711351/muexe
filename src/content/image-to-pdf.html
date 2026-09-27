@@ -1,0 +1,26 @@
+<style>
+.itp-list { display:flex; flex-wrap:wrap; gap:10px; margin-top:6px; }
+.itp-thumb { width:72px; height:72px; object-fit:cover; border-radius:8px; border:1px solid #e5e7eb; cursor:pointer; }
+.itp-thumb:hover { border-color:#ef4444; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<div class="tool-widget">
+  <div class="form-row">
+    <label for="itp-input">Choose images (JPG, PNG, WebP)</label>
+    <input type="file" id="itp-input" accept="image/*" multiple>
+  </div>
+  <div class="form-row">
+    <label>Page order — click a thumbnail to remove it</label>
+    <div id="itp-list" class="itp-list"></div>
+  </div>
+  <div class="form-row">
+    <label for="itp-size">Page size</label>
+    <select id="itp-size">
+      <option value="a4">A4</option>
+      <option value="letter">Letter</option>
+      <option value="fit">Fit to image size</option>
+    </select>
+  </div>
+  <button class="btn" id="itp-convert" type="button">Convert to PDF</button>
+  <p class="note" id="itp-status"></p>
+</div>

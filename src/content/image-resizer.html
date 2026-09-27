@@ -1,0 +1,24 @@
+<div class="tool-widget">
+  <div class="form-row">
+    <label for="ir-input">Choose an image</label>
+    <input type="file" id="ir-input" accept="image/*">
+  </div>
+  <p class="note" id="ir-orig"></p>
+  <div class="form-row">
+    <label><input type="checkbox" id="ir-keep" checked style="width:auto;display:inline;margin-right:6px">Keep aspect ratio</label>
+  </div>
+  <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div><label for="ir-width">Width (px)</label><input type="number" id="ir-width" min="1"></div>
+    <div><label for="ir-height">Height (px)</label><input type="number" id="ir-height" min="1"></div>
+  </div>
+  <div class="form-row">
+    <label for="ir-format">Output format</label>
+    <select id="ir-format">
+      <option value="image/png">PNG</option>
+      <option value="image/jpeg">JPEG</option>
+      <option value="image/webp">WebP</option>
+    </select>
+  </div>
+  <button class="btn" id="ir-download" type="button" style="display:none">Download resized image</button>
+  <p class="note" id="ir-status"></p>
+</div>
