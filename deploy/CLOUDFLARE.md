@@ -26,27 +26,55 @@ git push -u origin main
 
 ## 第 2 步：Cloudflare Pages 连接仓库
 
-1. Cloudflare Dashboard → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**。
-2. 选 GitHub → 授权 → 选 `muexe` 仓库 → **Begin setup**。
-3. 构建配置填：
+1. Cloudflare Dashboard → **Workers & Pages** → **Create application**。
+2. ⚠️ **关键**：创建页有 **Workers** 和 **Pages** 两个标签，**默认停在 Workers**，必须手动点 **Pages** 标签，再选 **Connect to Git**。
+   > 进错 Workers 会出现「部署命令 / 构建令牌 / 构建变量」等字段，且找不到「Build output directory」。看到这些字段说明进错入口了，退回重点 Pages。
+3. 选 GitHub → 授权 → 选 `muexe` 仓库 → **Begin setup**。
+4. 构建配置填：
 
 | 配置项 | 值 |
 |---|---|
+| Production branch | `main` |
+| Framework preset | `None` |
 | Build command | `python build.py` |
 | Build output directory | `dist` |
+| Root directory | 留空 |
 
-> 无需任何环境变量 —— `build.py` 只用 Python 标准库，Cloudflare 构建环境已预装 Python 3。
+> 无需任何环境变量 —— `build.py` 只用 Python 标准库，Cloudflare 构建环境已预装 Python 3。若报 `python: command not found`，把命令改成 `python3 build.py`。
 
-4. 点 **Save and Deploy**，几十秒后得到 `muexe.pages.dev` 临时域名。
+5. 点 **Save and Deploy**，几十秒后得到 `muexe.pages.dev` 临时域名。
 
 ---
 
-## 第 3 步：绑定 muexe.com（顺带解决域名解析）
+## 第 3 步：绑定 muexe.com 和 www.muexe.com
 
-1. Pages 项目 → **Custom domains** → **Set up a custom domain** → 输入 `muexe.com`。
-2. Cloudflare 会提示把域名的 **Nameserver（NS）** 改成它给的两个地址。
-3. 到你的域名注册商后台，把 NS 改成 Cloudflare 提供的地址，等生效（几分钟到几小时）。
-4. 生效后 Cloudflare 自动签发 HTTPS 证书，`https://muexe.com` 即可访问。
+分两小步：**先把域名接入 Cloudflare，再绑到 Pages**（顺序不能反）。
+
+### 3.1 先把 muexe.com 接入 Cloudflare（改 NS）
+
+1. Cloudflare 首页右上 **Add a site / 添加站点** → 输入 `muexe.com` → 选 **Free** 计划。
+2. Cloudflare 扫描现有 DNS 记录（还没解析过的话是空的，直接下一步）。
+3. Cloudflare 给你两个 **Nameserver 地址**（形如 `xxx.ns.cloudflare.com` / `yyy.ns.cloudflare.com`）。
+4. 到**买域名的注册商**后台（阿里云/腾讯云/GoDaddy/Namecheap 等），把域名的 NS 服务器改成上面两个地址。
+5. 等生效（通常几分钟，最长 24 小时）。Cloudflare 状态变为 **Active** 即完成。
+
+### 3.2 在 Pages 绑定两个域名
+
+1. Pages 项目 → **Custom domains** → **Set up a custom domain**。
+2. 输入 `muexe.com` → **Continue**。因为域名已在 Cloudflare，它会**自动创建 DNS 记录**（裸域用 CNAME flattening，无需手动配 A 记录）。
+3. 再点一次 **Set up a custom domain** → 输入 `www.muexe.com` → **Continue**（自动创建 CNAME `www` → `muexe.pages.dev`）。
+4. Cloudflare 自动签发 HTTPS 证书（Universal SSL），等 1~2 分钟后：
+   - `https://muexe.com` ✅
+   - `https://www.muexe.com` ✅
+
+### 3.3（可选）统一主域，避免 SEO 重复内容
+
+两个域名都能访问后，建议让一个 301 跳转到另一个，防止 Google 把两个当重复页。二选一：
+
+- 方案 A：`www.muexe.com` 301 → `muexe.com`（裸域为主，更简洁）
+- 方案 B：`muexe.com` 301 → `www.muexe.com`（www 为主）
+
+在 Cloudflare 域名面板 → **Rules / Redirect Rules** 里加一条 301 规则即可；不设也能用，只是 SEO 略吃亏。
 
 > 这一步顺便把之前「已买未解析」的问题解决了，还免费获得 DNS 托管 + 全球 CDN。
 
