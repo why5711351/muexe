@@ -311,7 +311,7 @@ def home_page() -> str:
     for c in categories:
         items = tools_by_cat.get(c["key"], [])
         cards = "".join(
-            f'<div class="tool-card"><div class="tc-icon">{t["icon"]}</div>'
+            f'<div class="tool-card cat-{c["key"]}"><div class="tc-icon">{t["icon"]}</div>'
             f'<h3><a href="/{t["slug"]}.html">{t["name"]}</a></h3>'
             f'<p>{t["short_desc"]}</p></div>'
             for t in items
@@ -344,10 +344,17 @@ def home_page() -> str:
         ],
     }, ensure_ascii=False)
 
+    hero_cats = "".join(
+        f'<a href="#{c["key"]}">{c["label"]}</a>' for c in categories
+    )
     body = f"""
-<header class="hero container">
-  <h1>Free Online Tools for Everyday Tasks</h1>
-  <p>Convert, compress, calculate and format — {len(tools)} fast, free tools that run right in your browser. No sign-up, no downloads, your files never leave your device.</p>
+<header class="hero">
+  <div class="container hero-inner">
+    <span class="hero-badge"><span class="dot"></span>{len(tools)} free tools &middot; no sign-up &middot; 100% private</span>
+    <h1>Free Online Tools for <span class="grad">Everyday Tasks</span></h1>
+    <p class="sub">Convert, compress, calculate and format — fast, free tools that run right in your browser. No sign-up, no downloads, your files never leave your device.</p>
+    <div class="hero-cats">{hero_cats}</div>
+  </div>
 </header>
 {''.join(sections)}
 """

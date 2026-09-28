@@ -385,33 +385,33 @@
       "name": "Percentage Calculator",
       "icon": "％",
       "category": "calculators",
-      "title": "Percentage Calculator – Free Online Tool | Muexe",
-      "description": "Percentage Calculator online for free. Fast, private and easy to use — works right in your browser with no sign-up or download required.",
-      "keywords": "percentage calculator, free percentage calculator, online percentage calculator, percentage calculator tool",
-      "short_desc": "Find percentages, increases and decreases in one click.",
-      "lead": "Use our free Percentage Calculator instantly in your browser. No sign-up, no upload — your data never leaves your device.",
+      "title": "Percentage Calculator – Percent of a Number & Percentage Change | Muexe",
+      "description": "Free percentage calculator: find a percent of a number, what percent one number is of another, and percentage increase or decrease. Instant and private.",
+      "keywords": "percentage calculator, percent of a number, percentage increase, percentage decrease, percentage change, what percent is, percent difference calculator",
+      "short_desc": "Find percent of a number, percentage share, and change — in one click.",
+      "lead": "Calculate percentages three ways: find a percent of a number, work out what percent one number is of another, and measure the percentage increase or decrease between two values — all instantly and privately in your browser.",
       "features": [
-        "Instant results with no waiting",
-        "100% free with no sign-up required",
-        "Runs locally — your data never leaves your device"
+        "Three modes: percent of a number, percent share, and percentage change",
+        "Instant results — no waiting",
+        "Runs locally, no sign-up or upload required"
       ],
       "how_to_use": [
-        "Enter your input in the box.",
-        "Click the button to run the tool.",
-        "Copy or download the result."
+        "Choose a mode: percent of a number, what percent, or change.",
+        "Enter your numbers — the result appears instantly.",
+        "Copy the answer with one click."
       ],
       "faq": [
         {
-          "q": "Is this Percentage Calculator really free?",
-          "a": "Yes. It is completely free with no hidden limits and no account required."
+          "q": "How do I calculate what percent one number is of another?",
+          "a": "Divide the part by the whole and multiply by 100. Choose the 'what percent' mode, enter both numbers, and the tool does it instantly."
         },
         {
-          "q": "Is my data uploaded to a server?",
-          "a": "No. Everything runs locally in your browser, so your data never leaves your device."
+          "q": "How do I calculate percentage increase or decrease?",
+          "a": "Subtract the original value from the new value, divide by the original, and multiply by 100. Use the 'percentage change' mode and enter both values."
         },
         {
-          "q": "Does it work on mobile?",
-          "a": "Yes, the tool works on any device with a modern browser — desktop, tablet or phone."
+          "q": "Is my data uploaded anywhere?",
+          "a": "No. All calculations run locally in your browser, so your numbers never leave your device."
         }
       ]
     }
