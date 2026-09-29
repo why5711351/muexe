@@ -1,0 +1,26 @@
+<div class="tool-widget">
+  <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div>
+      <label for="pc-amount">Remaining loan balance</label>
+      <div style="display:flex;gap:8px">
+        <select id="pc-currency" aria-label="Currency" style="width:92px;flex-shrink:0">
+          <option value="USD">$ USD</option>
+          <option value="EUR">€ EUR</option>
+          <option value="GBP">£ GBP</option>
+          <option value="CAD">C$ CAD</option>
+          <option value="AUD">A$ AUD</option>
+          <option value="JPY">¥ JPY</option>
+          <option value="CNY">¥ CNY</option>
+        </select>
+        <input type="number" id="pc-amount" placeholder="250000" min="1" step="any">
+      </div>
+    </div>
+    <div><label for="pc-rate">Interest rate (% / year)</label><input type="number" id="pc-rate" placeholder="6.5" step="0.01" min="0"></div>
+  </div>
+  <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div><label for="pc-term">Remaining term (years)</label><input type="number" id="pc-term" placeholder="25" min="0.5" max="50" step="0.5"></div>
+    <div><label for="pc-extra">Extra monthly payment</label><input type="number" id="pc-extra" placeholder="200" min="0" step="any"></div>
+  </div>
+  <button class="btn" id="pc-calc" type="button">Calculate savings</button>
+  <div class="result-box" id="pc-result" style="display:none"></div>
+</div>

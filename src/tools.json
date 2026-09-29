@@ -414,6 +414,45 @@
           "a": "No. All calculations run locally in your browser, so your numbers never leave your device."
         }
       ]
+    },
+    {
+      "slug": "mortgage-payoff-calculator",
+      "name": "Mortgage Payoff Calculator",
+      "icon": "💰",
+      "category": "calculators",
+      "title": "Mortgage Payoff Calculator – Save Interest with Extra Payments | Muexe",
+      "description": "See how much interest you can save and how much faster you'll pay off your mortgage by making extra monthly payments. Free early payoff calculator.",
+      "keywords": "mortgage payoff calculator, early mortgage payoff calculator, mortgage payoff calculator with extra payments, extra payment mortgage calculator, how much interest can i save paying extra on mortgage, mortgage extra payment calculator, pay off mortgage early calculator",
+      "short_desc": "See how extra payments cut your interest and years off your mortgage.",
+      "lead": "Find out how much money and time you can save by adding an extra amount to your monthly mortgage payment. Enter your loan details to compare your current plan against an accelerated payoff schedule.",
+      "features": [
+        "Side-by-side comparison of standard vs. accelerated payoff",
+        "Total interest saved and months knocked off your loan",
+        "Year-by-year amortization table for both plans"
+      ],
+      "how_to_use": [
+        "Enter your remaining loan balance, interest rate and term.",
+        "Add your extra monthly payment amount.",
+        "Compare your savings and see your new payoff date."
+      ],
+      "faq": [
+        {
+          "q": "How much faster will I pay off my mortgage with extra payments?",
+          "a": "It depends on the size of your extra payment and your interest rate. Even $100 a month can cut years off a 30-year loan — the tool shows your exact new payoff date and months saved."
+        },
+        {
+          "q": "How much interest can I save by paying extra on my mortgage?",
+          "a": "Because interest is charged on your remaining balance, extra payments reduce the principal faster, which lowers every future interest charge. The calculator shows your total interest saved."
+        },
+        {
+          "q": "Should I pay extra on my mortgage or invest the money instead?",
+          "a": "It depends on your interest rate and risk tolerance. Paying extra gives a guaranteed return equal to your mortgage rate. Compare that with expected investment returns before deciding."
+        },
+        {
+          "q": "Is there a penalty for paying off my mortgage early?",
+          "a": "Some loans have prepayment penalties. Check your loan agreement — many standard mortgages allow extra payments without penalty."
+        }
+      ]
     }
   ]
 }
