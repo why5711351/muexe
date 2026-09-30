@@ -240,6 +240,47 @@ def breadcrumb_html(t) -> str:
     )
 
 
+def about_html(t) -> str:
+    """SSR-rendered 'About' content: what it solves, how it works, assumptions.
+
+    This is the crawlable body that Google, AI crawlers and AdSense reviewers
+    read. It must be plain HTML in the source — never injected by JS.
+    """
+    parts = []
+    if t.get("solves"):
+        parts.append(f'<h3>What this tool does</h3><p>{t["solves"]}</p>')
+    if t.get("how_works"):
+        parts.append(f'<h3>How it works</h3><p>{t["how_works"]}</p>')
+    if t.get("assumptions"):
+        parts.append(f'<h3>Assumptions</h3><p>{t["assumptions"]}</p>')
+    return "".join(parts)
+
+
+def related_tools(t) -> str:
+    """Keyword-rich internal links to other tools in the same category."""
+    cat = t["category"]
+    related = [x for x in tools_by_cat[cat] if x["slug"] != t["slug"]]
+    if not related:
+        return ""
+    links = "".join(
+        f'<li><a href="/{r["slug"]}.html">{r["name"]}</a> — {r["short_desc"]}</li>'
+        for r in related
+    )
+    return (
+        f'<section class="related-tools">'
+        f'<h2>Related {cat_map[cat]["label"].lower()} tools</h2>'
+        f'<ul>{links}</ul></section>'
+    )
+
+
+def disclaimer_html(t) -> str:
+    """Legal disclaimer for finance/health tools (rendered only when set)."""
+    d = t.get("disclaimer")
+    if not d:
+        return ""
+    return f'<aside class="disclaimer"><h2>Disclaimer</h2><p>{d}</p></aside>'
+
+
 # ----------------------------------------------------------------------------
 # Page builders
 # ----------------------------------------------------------------------------
@@ -273,14 +314,14 @@ def tool_page(t) -> str:
 
   {social_share(t)}
 
-  {ad_slot()}
-
   <div class="prose">
     <h2>About the {t['name']}</h2>
-    <p>{t['lead']} It is completely free to use and works on any device — desktop, tablet or mobile — with no installation required.</p>
+    {about_html(t)}
+
     <h2>Key features</h2>
     <ul>{features}</ul>
-    <h2>How to use</h2>
+
+    <h2>How to use the {t['name']}</h2>
     <ol>{steps}</ol>
   </div>
 
@@ -290,6 +331,10 @@ def tool_page(t) -> str:
     <h2>Frequently Asked Questions</h2>
     {faqs}
   </section>
+
+  {related_tools(t)}
+
+  {disclaimer_html(t)}
 </main>
 """
     return (

@@ -412,6 +412,32 @@ label { font-weight: 600; font-size: .9rem; display: block; margin-bottom: 6px; 
 .faq details[open] summary::after { content: "–"; }
 .faq details p { margin-top: 10px; color: var(--text-soft); font-size: .92rem; }
 
+/* Related tools (internal links) */
+.related-tools {
+  margin: 34px 0 0;
+  padding: 24px 26px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.related-tools h2 { margin-bottom: 14px; font-size: 1.2rem; }
+.related-tools ul { list-style: none; padding: 0; display: grid; gap: 10px; }
+.related-tools li { font-size: .95rem; }
+.related-tools li a { font-weight: 600; }
+.related-tools li a::before { content: "→ "; color: var(--muted); }
+
+/* Disclaimer */
+.disclaimer {
+  margin: 30px 0 0;
+  padding: 16px 20px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-left: 4px solid #f59e0b;
+  border-radius: 11px;
+}
+.disclaimer h2 { font-size: .95rem; margin-bottom: 6px; color: #92400e; }
+.disclaimer p { font-size: .86rem; color: #78350f; }
+
 /* Ad slots */
 .ad-slot {
   margin: 28px 0;

@@ -8,22 +8,10 @@
     "keywords": "free online tools, web tools, image to pdf, image compressor, json formatter, bmi calculator, mortgage calculator, word counter"
   },
   "categories": [
-    {
-      "key": "converters",
-      "label": "Converters"
-    },
-    {
-      "key": "image",
-      "label": "Image Tools"
-    },
-    {
-      "key": "calculators",
-      "label": "Calculators"
-    },
-    {
-      "key": "text",
-      "label": "Text & Developer"
-    }
+    { "key": "converters", "label": "Converters" },
+    { "key": "image", "label": "Image Tools" },
+    { "key": "calculators", "label": "Calculators" },
+    { "key": "text", "label": "Text & Developer" }
   ],
   "tools": [
     {
@@ -36,6 +24,9 @@
       "keywords": "image to pdf, jpg to pdf, convert image to pdf, picture to pdf, free image to pdf converter",
       "short_desc": "Turn JPG, PNG or WebP images into one polished PDF — free and private.",
       "lead": "Convert your images into a clean, shareable PDF in seconds. Combine multiple images into one document, reorder pages, and download — all locally in your browser.",
+      "solves": "Turn scattered JPG, PNG and WebP images into a single, professional PDF in seconds. Instead of sending photos one by one or installing desktop software, you combine several pictures into one tidy document that is easy to share, print or archive — ideal for reports, applications, invoices and portfolios.",
+      "how_works": "Everything runs locally in your browser. Each image you add is decoded and placed onto its own PDF page at its natural dimensions, and you can drag to reorder pages before exporting. The PDF is assembled in memory with no file ever uploaded to a server, then downloads instantly as a standard, shareable document.",
+      "assumptions": "Supported input formats are JPG, PNG and WebP. Pages follow the order shown in your list and are placed at their original resolution. Very large or high-resolution images may take a little longer to process depending on your device's available memory.",
       "features": [
         "Supports JPG, PNG and WebP input",
         "Combine multiple images into a single PDF",
@@ -62,6 +53,10 @@
         {
           "q": "Can I merge multiple images into one PDF?",
           "a": "Yes. Add several images and they are combined into a single multi-page PDF in the order you choose."
+        },
+        {
+          "q": "Can I convert HEIC or TIFF images to PDF?",
+          "a": "Most browsers cannot open HEIC or TIFF directly. Convert those files to JPG or PNG first, then add them here to build your PDF."
         }
       ]
     },
@@ -75,6 +70,9 @@
       "keywords": "jpg to png, convert jpg to png, jpeg to png converter, free jpg to png",
       "short_desc": "Convert JPG photos to crisp PNG files in one click, right in your browser.",
       "lead": "Convert JPG (JPEG) images to the PNG format instantly. PNG is ideal when you need higher quality or want to preserve details without compression artifacts.",
+      "solves": "Convert JPG (JPEG) photos into lossless PNG files in one click. This solves the problem of compression artifacts and blurry edges: PNG preserves sharp lines and text, and supports transparent backgrounds — useful for logos, screenshots and graphics that need to stay crisp.",
+      "how_works": "Your JPG is loaded and redrawn onto a canvas using your browser's built-in image engine, then re-encoded as a PNG without lossy compression. Because all processing happens on your device, the image never travels to a server. The converted file downloads immediately at full quality.",
+      "assumptions": "Converting to PNG usually increases file size because PNG is lossless. The tool works best with images your browser can decode, and the result keeps the original pixel dimensions.",
       "features": [
         "Instant conversion with no waiting",
         "Lossless PNG output for maximum quality",
@@ -97,6 +95,14 @@
         {
           "q": "Is my image uploaded anywhere?",
           "a": "No, conversion happens entirely in your browser. Your image never leaves your device."
+        },
+        {
+          "q": "Does JPG to PNG conversion increase file size?",
+          "a": "Usually, yes. PNG uses lossless compression, so the same image is often larger than a JPG. The trade-off is sharper quality and support for transparency."
+        },
+        {
+          "q": "Will I lose quality when converting?",
+          "a": "No. PNG does not add JPG-style artifacts, so the converted image keeps its visual quality and supports transparent backgrounds."
         }
       ]
     },
@@ -110,6 +116,9 @@
       "keywords": "compress image, image compressor, reduce image size, compress jpg, compress png, optimize images",
       "short_desc": "Shrink image file size without visible quality loss — perfect for web and email.",
       "lead": "Reduce the file size of your images while keeping them looking great. Choose a quality level and download an optimized version — smaller files load faster and save storage.",
+      "solves": "Shrink the file size of JPG, PNG and WebP images without visibly hurting quality. This solves the everyday problem of photos that are too large for email, websites, social media or online forms that enforce strict size limits.",
+      "how_works": "The image is decoded locally and re-encoded with a quality setting you control. Lowering quality removes less noticeable detail, which dramatically reduces file size while keeping the same pixel dimensions. A live before-and-after comparison shows exactly how much space you save before you download.",
+      "assumptions": "Compression keeps the original dimensions but reduces quality slightly depending on the level you choose. The amount of savings varies by image; photos with lots of detail compress less than simple graphics.",
       "features": [
         "Adjustable quality slider for size vs. clarity",
         "Live preview of file size before and after",
@@ -132,6 +141,14 @@
         {
           "q": "Is it safe to compress sensitive images?",
           "a": "Yes. Processing happens entirely in your browser, so files are never uploaded to a server."
+        },
+        {
+          "q": "Will compressing my image make it blurry?",
+          "a": "Only if you set the quality very low. Most photos can be reduced by 50–80% with little visible difference; use the slider to find the right balance."
+        },
+        {
+          "q": "Does compression change the image dimensions?",
+          "a": "No. The compressor reduces file size in bytes while keeping the same pixel width and height."
         }
       ]
     },
@@ -145,6 +162,9 @@
       "keywords": "resize image, image resizer, change image size, resize photo online, image resize tool",
       "short_desc": "Resize images to exact pixel dimensions for social media, web or print.",
       "lead": "Change an image's dimensions by entering exact pixel values or a percentage. Ideal for matching social media sizes, thumbnails, avatars and print requirements.",
+      "solves": "Resize any image to exact pixel dimensions or a percentage, ideal for matching social media, avatar, thumbnail or print specifications. It removes the guesswork of getting an image to the right size without a desktop editor.",
+      "how_works": "Your image is loaded locally and redrawn at the new dimensions. You can resize by entering exact width and height, or by a percentage, with an optional lock that keeps the aspect ratio so nothing distorts. The result downloads in the format you choose.",
+      "assumptions": "Downscaling keeps quality high, while upscaling beyond the original size may look softer. The tool assumes you know your target dimensions, and outputs JPG, PNG or WebP.",
       "features": [
         "Resize by pixels or percentage",
         "Lock aspect ratio to avoid distortion",
@@ -167,6 +187,14 @@
         {
           "q": "Does resizing lower image quality?",
           "a": "Downscaling keeps quality high. Upscaling beyond the original size may look softer."
+        },
+        {
+          "q": "Will resizing distort my image?",
+          "a": "Not if you keep the aspect ratio locked. Set one dimension and the other adjusts automatically to avoid stretching."
+        },
+        {
+          "q": "Can I enlarge a small image without quality loss?",
+          "a": "Upscaling beyond the original resolution cannot add detail, so enlarged images may look softer. Start with the highest-resolution source available."
         }
       ]
     },
@@ -180,6 +208,9 @@
       "keywords": "bmi calculator, body mass index, bmi chart, calculate bmi, healthy weight",
       "short_desc": "Find your Body Mass Index and healthy weight range in seconds.",
       "lead": "Calculate your Body Mass Index (BMI) and see which weight category you fall into. BMI is a simple screening tool used to estimate whether you are in a healthy weight range.",
+      "solves": "Calculate your Body Mass Index (BMI) from your height and weight to see which weight category you fall into and your healthy weight range. It gives a quick, objective screening number to guide conversations about your health.",
+      "how_works": "BMI is calculated as weight in kilograms divided by height in meters squared. The tool supports both metric and imperial units, converts them automatically, and maps your result to standard WHO categories — underweight, normal, overweight and obese — with a visual gauge.",
+      "assumptions": "BMI is a population-level screening tool and does not account for muscle mass, age, bone density or body composition. Athletes and older adults may be misclassified; always consult a healthcare professional for a full assessment.",
       "features": [
         "Metric and imperial unit support",
         "Instant category and healthy-range results",
@@ -202,8 +233,17 @@
         {
           "q": "Which units can I use?",
           "a": "You can use metric (kg / cm) or imperial (lb / ft + in) units."
+        },
+        {
+          "q": "What BMI range is considered healthy?",
+          "a": "For most adults, a BMI between 18.5 and 24.9 is considered a healthy weight. Below 18.5 is underweight, 25 to 29.9 is overweight, and 30 or above is obese."
+        },
+        {
+          "q": "Does BMI work for athletes or children?",
+          "a": "Not reliably. BMI ignores muscle mass and body composition, and different ranges apply to children and teens, so those groups should use other methods."
         }
-      ]
+      ],
+      "disclaimer": "This BMI calculator is provided for general information and educational purposes only and is not medical advice. It should not be used to diagnose or treat any condition. Always consult a qualified healthcare professional before making decisions about your health."
     },
     {
       "slug": "mortgage-calculator",
@@ -215,6 +255,9 @@
       "keywords": "mortgage calculator, mortgage payment, home loan calculator, monthly mortgage, amortization",
       "short_desc": "Estimate monthly payments and total interest for any home loan.",
       "lead": "Estimate your monthly mortgage payment and see how much interest you'll pay over the life of the loan. Adjust loan amount, interest rate and term to compare scenarios.",
+      "solves": "Estimate your monthly mortgage payment, including principal, interest, property tax and insurance, and see the total interest over the life of the loan. It helps you budget and compare loan amounts, rates and terms before you commit.",
+      "how_works": "The tool uses the standard amortization formula to calculate your monthly principal-and-interest payment from the loan amount, annual interest rate and term. It then adds optional tax, insurance and extra payments, and builds a full amortization schedule showing how each payment splits between interest and principal.",
+      "assumptions": "Results assume a fixed interest rate for the entire term and that taxes and insurance stay constant. Actual payments vary with your lender, credit profile and changing escrow amounts, so treat the output as an estimate.",
       "features": [
         "Includes tax, insurance and extra payments",
         "Full amortization breakdown",
@@ -237,8 +280,17 @@
         {
           "q": "Is this a substitute for a lender's quote?",
           "a": "No. Results are estimates only. Actual terms depend on your lender, credit and other factors."
+        },
+        {
+          "q": "How is the monthly payment calculated?",
+          "a": "It uses the standard amortization formula on your loan amount, rate and term, then adds optional property tax, insurance and any extra payment you enter."
+        },
+        {
+          "q": "Does the calculator include PMI or HOA fees?",
+          "a": "No. It covers principal, interest, tax and insurance. Add mortgage insurance, HOA or other fees separately for a complete picture."
         }
-      ]
+      ],
+      "disclaimer": "This mortgage calculator is for informational and educational purposes only and does not constitute financial, legal or lending advice. Interest rates, taxes and insurance vary. Always consult a qualified financial advisor or lender before making borrowing decisions."
     },
     {
       "slug": "date-calculator",
@@ -250,6 +302,9 @@
       "keywords": "date calculator, add days to date, days between dates, date difference calculator, date math",
       "short_desc": "Add or subtract days, or count the days between two dates.",
       "lead": "Quickly add or subtract days, weeks, months or years from a date, or calculate the exact number of days between two dates — perfect for deadlines, events and planning.",
+      "solves": "Add or subtract days, weeks, months or years from any date, or count the exact number of days between two dates. It removes the mental arithmetic from planning deadlines, events, projects and countdowns.",
+      "how_works": "The tool performs calendar arithmetic natively in your browser, correctly handling leap years and varying month lengths. Choose a start date, add or subtract a period, or pick a second date to get the day difference — results update instantly as you type.",
+      "assumptions": "The calculator works with calendar days, not business days, and supports any valid date from year 1 to 9999. For working-day deadlines, add a buffer for weekends and holidays manually.",
       "features": [
         "Add or subtract days, weeks, months and years",
         "Count days between two dates",
@@ -272,6 +327,14 @@
         {
           "q": "What date ranges are supported?",
           "a": "Any valid date from year 1 to 9999 is supported."
+        },
+        {
+          "q": "Does it count business days or calendar days?",
+          "a": "Calendar days. It counts every day between two dates, including weekends. For business days, add a buffer for weekends and holidays."
+        },
+        {
+          "q": "Can I calculate a date in the past?",
+          "a": "Yes. Enter a negative number or a start date in the past to count backwards, or find the difference between any two historical dates."
         }
       ]
     },
@@ -285,6 +348,9 @@
       "keywords": "json formatter, json validator, format json, json beautifier, json minify, pretty print json",
       "short_desc": "Beautify, validate and minify JSON instantly with clear error hints.",
       "lead": "Paste messy JSON and get it formatted, validated and beautified in milliseconds. Spot errors instantly and minify your data for production use.",
+      "solves": "Format, validate and minify JSON in your browser. It turns messy, minified JSON into clean, indented, readable text and pinpoints syntax errors — saving developers from staring at a wall of unreadable data.",
+      "how_works": "Your JSON is parsed locally with the browser's native JSON engine. Valid JSON is beautified with consistent indentation, while invalid JSON returns a precise error with the character position. The Minify button compresses valid JSON back to a single line.",
+      "assumptions": "The tool validates standard JSON only, so JavaScript objects with comments or trailing commas will fail. It assumes you paste or type text; data never leaves your device.",
       "features": [
         "Instant formatting and validation",
         "Clear error messages with position hints",
@@ -307,6 +373,14 @@
         {
           "q": "Can I minify JSON too?",
           "a": "Yes. Use the Minify button to compress JSON to a single line for production."
+        },
+        {
+          "q": "Why does my JSON show an error?",
+          "a": "Standard JSON does not allow trailing commas, single quotes or comments. Remove them or fix the reported position and it will format correctly."
+        },
+        {
+          "q": "Can I format large JSON files?",
+          "a": "Yes, though very large files may slow down. The tool processes everything locally, so nothing is uploaded."
         }
       ]
     },
@@ -320,6 +394,9 @@
       "keywords": "word counter, character counter, count words, word count online, character count, text counter",
       "short_desc": "Count words, characters, sentences and reading time instantly.",
       "lead": "Paste or type your text to count words, characters, sentences and paragraphs in real time. Also see estimated reading and speaking time — useful for essays, articles and social posts.",
+      "solves": "Count words, characters, sentences, paragraphs and estimated reading and speaking time for any text. It helps writers, students and marketers hit word limits and understand how long their content will take to consume.",
+      "how_works": "Text is analyzed in real time as you type or paste. Words are counted as groups of characters separated by spaces and punctuation, and reading time is estimated from a standard words-per-minute rate. Nothing is stored or sent anywhere.",
+      "assumptions": "Reading and speaking times are estimates based on average rates and will vary by person. Word counts treat space-separated tokens as words, so languages without spaces may count differently.",
       "features": [
         "Real-time word and character counts",
         "Sentence, paragraph and line stats",
@@ -342,6 +419,14 @@
         {
           "q": "Is my text stored anywhere?",
           "a": "No. Everything is processed in your browser and never uploaded."
+        },
+        {
+          "q": "How is reading time calculated?",
+          "a": "It divides your word count by an average reading speed of about 200 words per minute. Actual time varies by reader, so treat it as an estimate."
+        },
+        {
+          "q": "Does it count words in all languages?",
+          "a": "It counts space-separated words, which works well for English and similar languages. Languages without spaces, like Chinese or Japanese, may count as fewer words."
         }
       ]
     },
@@ -355,6 +440,9 @@
       "keywords": "case converter, text case converter, uppercase to lowercase, title case, sentence case, camel case",
       "short_desc": "Switch text between UPPERCASE, lowercase, Title Case and more.",
       "lead": "Convert any text between uppercase, lowercase, title case, sentence case, camelCase, PascalCase and more. Perfect for fixing caps, writing headlines and formatting code.",
+      "solves": "Convert text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase and more in one click. It fixes accidental caps-lock text and formats headlines, titles and code identifiers without retyping.",
+      "how_works": "Text is transformed locally using built-in string rules. Each style applies a specific capitalization pattern — for example, Title Case capitalizes the first letter of each major word, while camelCase joins words and capitalizes each after the first. Numbers and punctuation are preserved.",
+      "assumptions": "The tool works on plain text and leaves numbers, punctuation and symbols untouched. Title Case follows simplified rules and may not match every style guide's exceptions for small words.",
       "features": [
         "Multiple case styles in one click",
         "Instant, live conversion",
@@ -377,6 +465,14 @@
         {
           "q": "Is my text uploaded anywhere?",
           "a": "No, conversion runs entirely in your browser."
+        },
+        {
+          "q": "Which case style should I use for a headline?",
+          "a": "Title Case is standard for headlines and article titles. Sentence case is common for body text and many modern news sites."
+        },
+        {
+          "q": "Does it change numbers or punctuation?",
+          "a": "No. Only letters are transformed; numbers, punctuation and symbols are preserved exactly as you typed them."
         }
       ]
     },
@@ -390,6 +486,9 @@
       "keywords": "percentage calculator, percent of a number, percentage increase, percentage decrease, percentage change, what percent is, percent difference calculator",
       "short_desc": "Find percent of a number, percentage share, and change — in one click.",
       "lead": "Calculate percentages three ways: find a percent of a number, work out what percent one number is of another, and measure the percentage increase or decrease between two values — all instantly and privately in your browser.",
+      "solves": "Calculate percentages three ways: find a percent of a number, determine what percent one number is of another, and measure the percentage increase or decrease between two values. It handles everyday math like discounts, tips, grades and growth rates.",
+      "how_works": "Each mode applies a simple formula. Percent of a number multiplies the value by the percentage; “what percent” divides the part by the whole; and percentage change divides the difference by the original value. All results are computed instantly in your browser.",
+      "assumptions": "Results are rounded to a sensible number of decimal places for display. The tool assumes standard percentage math; for compound growth or repeated changes, enter each step separately.",
       "features": [
         "Three modes: percent of a number, percent share, and percentage change",
         "Instant results — no waiting",
@@ -412,6 +511,14 @@
         {
           "q": "Is my data uploaded anywhere?",
           "a": "No. All calculations run locally in your browser, so your numbers never leave your device."
+        },
+        {
+          "q": "How do I calculate a tip or discount?",
+          "a": "Use 'percent of a number' mode. Enter the bill or price and the tip or discount percentage to get the amount instantly."
+        },
+        {
+          "q": "What is percentage change?",
+          "a": "It measures how much a value grew or shrank relative to the original. Subtract the original from the new value, divide by the original, and multiply by 100."
         }
       ]
     },
@@ -425,6 +532,9 @@
       "keywords": "mortgage payoff calculator, early mortgage payoff calculator, mortgage payoff calculator with extra payments, extra payment mortgage calculator, how much interest can i save paying extra on mortgage, mortgage extra payment calculator, pay off mortgage early calculator",
       "short_desc": "See how extra payments cut your interest and years off your mortgage.",
       "lead": "Find out how much money and time you can save by adding an extra amount to your monthly mortgage payment. Enter your loan details to compare your current plan against an accelerated payoff schedule.",
+      "solves": "See how much interest and time you save by adding extra monthly payments to your mortgage. It compares your current plan against an accelerated schedule, showing your new payoff date and total savings.",
+      "how_works": "The tool simulates your loan month by month. Each month it charges interest on the remaining balance, then applies your regular payment plus your extra amount to the principal. Because extra payments reduce the balance faster, less interest accrues — and the loan ends years sooner. It builds a year-by-year amortization table for both the standard and accelerated plans.",
+      "assumptions": "Calculations assume a fixed interest rate, no prepayment penalty, and that you make the same extra payment every month for the remaining term. Actual savings depend on your lender's rules and any rate changes.",
       "features": [
         "Side-by-side comparison of standard vs. accelerated payoff",
         "Total interest saved and months knocked off your loan",
@@ -451,8 +561,13 @@
         {
           "q": "Is there a penalty for paying off my mortgage early?",
           "a": "Some loans have prepayment penalties. Check your loan agreement — many standard mortgages allow extra payments without penalty."
+        },
+        {
+          "q": "Do extra payments reduce my monthly payment or shorten my term?",
+          "a": "It depends on your lender. Some apply extra payments to principal and shorten the term while keeping your payment the same; others recast the loan to lower the payment. Check your loan agreement."
         }
-      ]
+      ],
+      "disclaimer": "This mortgage payoff calculator is for informational and educational purposes only and does not constitute financial or lending advice. Actual results depend on your loan terms and lender. Consult a qualified financial advisor before making prepayment decisions."
     }
   ]
 }
