@@ -55,45 +55,100 @@ function json(payload, status) {
 // ----------------------------------------------------------------------------
 // Captions
 // ----------------------------------------------------------------------------
+const CLIENT_CONTEXTS = [
+  {
+    name: "ANDROID",
+    clientName: "ANDROID",
+    clientVersion: "20.10.38",
+    androidSdkVersion: 30,
+    userAgent: "com.google.android.youtube/20.10.38 (Linux; U; Android 14) gzip",
+    clientHeader: "3",
+  },
+  {
+    name: "IOS",
+    clientName: "IOS",
+    clientVersion: "19.29.37",
+    deviceMake: "Apple",
+    deviceModel: "iPhone16,2",
+    osName: "iOS",
+    osVersion: "18.1.0",
+    userAgent:
+      "com.google.ios.youtube/19.29.37 (iPhone; CPU iPhone OS 18_1 like Mac OS X)",
+    clientHeader: "5",
+  },
+  {
+    name: "WEB",
+    clientName: "WEB",
+    clientVersion: "2.20250101.00.00",
+    userAgent:
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+    clientHeader: "1",
+  },
+];
+
+// YouTube WEB-client caption URLs became Proof-of-Origin (PO) token gated in
+// mid-2025 and now download empty bodies, while the ANDROID / IOS clients still
+// return signed, token-free caption URLs. We walk each client through the full
+// player -> track -> download pipeline and return on the first that succeeds.
 async function fetchTranscript(videoId) {
-  const player = await getPlayerResponse(videoId);
-  const title = player?.videoDetails?.title || "";
+  const failures = [];
+  for (const ctx of CLIENT_CONTEXTS) {
+    try {
+      const player = await getPlayerResponse(videoId, ctx);
+      const tracks =
+        player?.captions?.playerCaptionsTracklistRenderer?.captionTracks || [];
+      if (!tracks.length) {
+        failures.push(`${ctx.name}: no caption tracks`);
+        continue;
+      }
 
-  const tracks =
-    player?.captions?.playerCaptionsTracklistRenderer?.captionTracks || [];
-  if (!tracks.length) {
-    throw new Error(
-      "No subtitles available for this video (captions may be disabled)."
-    );
+      const manual = tracks.filter((t) => t.kind !== "asr");
+      const auto = tracks.filter((t) => t.kind === "asr");
+      const track = pickPreferred(manual) || pickPreferred(auto) || tracks[0];
+
+      const segments = await fetchCaptions(track.baseUrl, ctx.userAgent);
+
+      return {
+        videoId,
+        title: player?.videoDetails?.title || "",
+        language: track.languageCode || "en",
+        generated: track.kind === "asr",
+        segments,
+      };
+    } catch (e) {
+      failures.push(`${ctx.name}: ${e.message}`);
+    }
   }
-
-  const manual = tracks.filter((t) => t.kind !== "asr");
-  const auto = tracks.filter((t) => t.kind === "asr");
-  const track = pickPreferred(manual) || pickPreferred(auto) || tracks[0];
-
-  const segments = await fetchCaptions(track.baseUrl);
-
-  return {
-    videoId,
-    title,
-    language: track.languageCode || "en",
-    generated: track.kind === "asr",
-    segments,
-  };
+  throw new Error(
+    "No subtitles available for this video (captions may be disabled)."
+  );
 }
 
-async function getPlayerResponse(videoId) {
+async function getPlayerResponse(videoId, ctx) {
+  const client = {
+    clientName: ctx.clientName,
+    clientVersion: ctx.clientVersion,
+    hl: "en",
+    gl: "US",
+  };
+  if (ctx.androidSdkVersion) client.androidSdkVersion = ctx.androidSdkVersion;
+  if (ctx.deviceMake) client.deviceMake = ctx.deviceMake;
+  if (ctx.deviceModel) client.deviceModel = ctx.deviceModel;
+  if (ctx.osName) client.osName = ctx.osName;
+  if (ctx.osVersion) client.osVersion = ctx.osVersion;
+
   const res = await fetch(
     `https://www.youtube.com/youtubei/v1/player?key=${INNERTUBE_KEY}`,
     {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        context: {
-          client: { clientName: "WEB", clientVersion: "2.20240801.00.00", hl: "en", gl: "US" },
-        },
-        videoId,
-      }),
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": ctx.userAgent,
+        "X-YouTube-Client-Name": ctx.clientHeader,
+        "X-YouTube-Client-Version": ctx.clientVersion,
+        Origin: "https://www.youtube.com",
+      },
+      body: JSON.stringify({ context: { client }, videoId }),
     }
   );
   if (!res.ok) {
@@ -108,8 +163,10 @@ function pickPreferred(tracks) {
   return en || tracks[0];
 }
 
-async function fetchCaptions(baseUrl) {
-  const res = await fetch(baseUrl + "&fmt=json3");
+async function fetchCaptions(baseUrl, userAgent) {
+  const res = await fetch(baseUrl + "&fmt=json3", {
+    headers: { "User-Agent": userAgent || "" },
+  });
   if (!res.ok) throw new Error("Failed to download subtitles.");
   const data = await res.json();
 
