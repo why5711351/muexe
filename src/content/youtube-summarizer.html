@@ -1,0 +1,13 @@
+<div class="tool-widget">
+  <div class="form-row">
+    <label for="yt-url">YouTube video URL</label>
+    <div style="display:flex;gap:10px">
+      <input type="text" id="yt-url" placeholder="https://www.youtube.com/watch?v=…" style="flex:1">
+      <button class="btn" id="yt-go" type="button">Summarize</button>
+    </div>
+    <p class="note">Paste any YouTube link — we fetch the captions and generate an AI summary. No sign-up, no file upload.</p>
+  </div>
+
+  <div id="yt-status" aria-live="polite"></div>
+  <div id="yt-result" style="display:none"></div>
+</div>

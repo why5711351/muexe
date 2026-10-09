@@ -568,6 +568,53 @@
         }
       ],
       "disclaimer": "This mortgage payoff calculator is for informational and educational purposes only and does not constitute financial or lending advice. Actual results depend on your loan terms and lender. Consult a qualified financial advisor before making prepayment decisions."
+    },
+    {
+      "slug": "youtube-summarizer",
+      "name": "YouTube Video Summarizer",
+      "icon": "🎬",
+      "category": "text",
+      "title": "YouTube Video Summarizer – AI Summary of Any Video Free | Muexe",
+      "description": "Summarize any YouTube video instantly with AI. Paste a URL and get a concise summary, key points and timestamped chapters — free, no sign-up, nothing uploaded.",
+      "keywords": "youtube video summarizer, youtube summary generator, summarize youtube video with ai, youtube transcript summarizer, ai video summarizer, youtube to text, video summary tool",
+      "short_desc": "Turn any YouTube video into an AI summary with key points and chapters.",
+      "lead": "Paste a YouTube link and get an AI-written summary of the whole video — a quick overview, key points and timestamped chapters — so you can skip straight to the parts that matter.",
+      "solves": "Turn any YouTube video into a concise, readable summary. Paste a video link and get a clear overview, key points and timestamped chapters in seconds — no need to watch the whole video or take notes. Perfect for lectures, tutorials, podcasts and long interviews you want to digest quickly.",
+      "how_works": "The tool reads the video's subtitles (manually created captions first, then YouTube's auto-generated captions as a fallback) and sends that text to an AI language model. The AI reads the transcript and produces a structured English summary: an overview, bullet points and chapter breakdowns with timestamps. Each chapter links back to that moment in the original video.",
+      "assumptions": "The tool relies on the video having captions. If captions are disabled it cannot summarize. Auto-generated captions may contain errors, so summaries of those videos can be slightly less accurate. Very long videos are summarized from the first portion of the transcript.",
+      "features": [
+        "AI-powered summary in seconds",
+        "Key points and timestamped chapters",
+        "Works with manual and auto captions",
+        "Free, no sign-up, nothing uploaded"
+      ],
+      "how_to_use": [
+        "Paste a YouTube video URL into the box.",
+        "Click “Summarize” and wait a few seconds.",
+        "Read the summary, key points and clickable chapters."
+      ],
+      "faq": [
+        {
+          "q": "Is this YouTube summarizer really free?",
+          "a": "Yes. It is completely free with no account required and no hidden limits. The AI runs on a free tier that is plenty for regular personal use."
+        },
+        {
+          "q": "Does it work with any YouTube video?",
+          "a": "It works with any video that has captions enabled. Manually added subtitles give the most accurate results; otherwise the tool uses YouTube's auto-generated captions."
+        },
+        {
+          "q": "Do I need to watch the video first?",
+          "a": "No. Just paste the link. The tool reads the transcript and gives you a summary, key points and chapters so you can jump straight to the parts you care about."
+        },
+        {
+          "q": "Is the summary accurate?",
+          "a": "It is based directly on the video's transcript, so it reflects what was actually said. For auto-generated captions, minor wording errors can occur because speech-to-text is not perfect."
+        },
+        {
+          "q": "Is my data uploaded anywhere?",
+          "a": "The video link and its transcript are processed by a serverless function to generate the summary. No account is created and nothing is stored long-term."
+        }
+      ]
     }
   ]
 }
