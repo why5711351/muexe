@@ -17,19 +17,40 @@ functions/api/summarize.js（Pages Function）
 返回 JSON：summary + keyPoints + chapters（带时间戳）
 ```
 
-## 一次性配置：绑定 Workers AI（必须，否则报 500）
+## 绑定 Workers AI（已通过 wrangler.jsonc 自动声明，无需手动后台配置 ✅）
 
-Pages 项目需要绑定 Cloudflare 的 AI 服务，Function 里通过 `env.AI` 调用。
+项目根目录的 `wrangler.jsonc` 已经声明了 AI 绑定：
 
-1. 打开 Cloudflare Dashboard → 进入 **muexe 的 Pages 项目**
-2. 左侧 **Settings** → **Functions**
-3. 找到 **Bindings / AI** 相关区域（界面可能叫 "Workers AI" 或 "Bindings"），点 **Add binding**
-   - **Type / 类型**：选 `AI`
-   - **Variable name / 变量名**：填 `AI`（必须一字不差，代码里写死了这个名字）
-4. 保存。
+```jsonc
+{
+  "name": "muexe",
+  "compatibility_date": "2025-01-01",
+  "pages_build_output_dir": "./dist",
+  "ai": { "binding": "AI" }
+}
+```
 
-> 如果找不到 Functions 入口，用 Dashboard 顶部**全局搜索框**搜「Bindings」或「AI」直接跳转。
+Cloudflare 构建系统（日志里的 "Checking for configuration in a Wrangler configuration file"）会读取这个文件，`git push` 后自动应用 AI 绑定，**无需在后台手动配置**。
+
 > Cloudflare Workers AI 每天有 **10,000 Neurons 免费额度**，这个工具每次总结约消耗几百 Neurons，个人使用完全够。
+
+### 如果 wrangler.jsonc 未自动生效（BETA 功能，兜底手动配置）
+
+万一 push 后仍报 `AI binding is not configured`，说明该 BETA 功能在你账号未启用，改为后台手动配置：
+
+1. Cloudflare Dashboard → **Workers & Pages** → 点进 **muexe** 项目 → **Settings** → **Bindings**（⚠️ 是 Bindings，不是「环境变量 / Variables and Secrets」）
+2. 点 **Add binding** → Type 选 `Workers AI` → Variable name 填 `AI`
+3. 保存后必须重新部署：**Deployments** → 最新一条部署记录最右侧的 **「⋯」三个点** → **Retry deployment**
+
+### 重新部署的另一种办法（找不到「⋯」按钮时用）
+
+在本地仓库执行一次空提交并推送，Cloudflare 会自动触发重新构建（等效于 Retry deployment）：
+
+```bash
+cd /d "D:\网站\workbuddy\muexe"
+git commit --allow-empty -m "chore: trigger redeploy to apply AI binding"
+git push origin main
+```
 
 ## 部署
 
