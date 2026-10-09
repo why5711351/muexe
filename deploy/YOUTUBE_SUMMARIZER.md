@@ -12,7 +12,7 @@
    ↓
 functions/api/summarize.js（Pages Function）
    ├─ 1. 抓取字幕（手动字幕优先 → 自动字幕兜底）
-   └─ 2. 调用 Workers AI（llama-3.1-8b）生成结构化英文总结
+   └─ 2. 调用 Workers AI（llama-4-scout-17b）生成结构化英文总结
    ↓
 返回 JSON：summary + keyPoints + chapters（带时间戳）
 ```

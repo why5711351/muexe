@@ -2,13 +2,13 @@
 // Route: /api/summarize?url=<youtube_url>
 //
 // Pipeline: parse video ID -> fetch captions (manual preferred, auto fallback)
-//           -> call Workers AI (llama-3.1-8b) -> return structured English summary.
+//           -> call Workers AI (llama-4-scout-17b) -> return structured English summary.
 // No npm dependencies. Requires a Workers AI binding named "AI"
 // (see deploy/YOUTUBE_SUMMARIZER.md).
 
 const INNERTUBE_KEY_FALLBACK = "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8";
 const BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
-const AI_MODEL = "@cf/meta/llama-3.1-8b-instruct";
+const AI_MODEL = "@cf/meta/llama-4-scout-17b-16e-instruct";
 const MAX_TRANSCRIPT_CHARS = 20000;
 
 const JSON_HEADERS = {
