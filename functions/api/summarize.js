@@ -6,7 +6,8 @@
 // No npm dependencies. Requires a Workers AI binding named "AI"
 // (see deploy/YOUTUBE_SUMMARIZER.md).
 
-const INNERTUBE_KEY = "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8";
+const INNERTUBE_KEY_FALLBACK = "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8";
+const BROWSER_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 const AI_MODEL = "@cf/meta/llama-3.1-8b-instruct";
 const MAX_TRANSCRIPT_CHARS = 20000;
 
@@ -88,43 +89,67 @@ const CLIENT_CONTEXTS = [
 
 // YouTube WEB-client caption URLs became Proof-of-Origin (PO) token gated in
 // mid-2025 and now download empty bodies, while the ANDROID / IOS clients still
-// return signed, token-free caption URLs. We walk each client through the full
+// return signed, token-free caption URLs. Hardcoded INNERTUBE keys expire, so we
+// fetch a fresh key from the watch page, then walk each client through the full
 // player -> track -> download pipeline and return on the first that succeeds.
+async function fetchInnertubeKey(videoId) {
+  const res = await fetch(`https://www.youtube.com/watch?v=${videoId}`, {
+    headers: { "User-Agent": BROWSER_UA, "Accept-Language": "en-US,en;q=0.9" },
+  });
+  if (!res.ok) throw new Error(`watch page HTTP ${res.status}`);
+  const html = await res.text();
+  const m = html.match(/"INNERTUBE_API_KEY":"([^"]+)"/);
+  if (!m) throw new Error("INNERTUBE_API_KEY not found");
+  return m[1];
+}
+
 async function fetchTranscript(videoId) {
   const failures = [];
-  for (const ctx of CLIENT_CONTEXTS) {
-    try {
-      const player = await getPlayerResponse(videoId, ctx);
-      const tracks =
-        player?.captions?.playerCaptionsTracklistRenderer?.captionTracks || [];
-      if (!tracks.length) {
-        failures.push(`${ctx.name}: no caption tracks`);
-        continue;
+
+  let dynamicKey = null;
+  try {
+    dynamicKey = await fetchInnertubeKey(videoId);
+  } catch (e) {
+    failures.push(`key: ${e.message}`);
+  }
+  const keys = dynamicKey ? [dynamicKey, INNERTUBE_KEY_FALLBACK] : [INNERTUBE_KEY_FALLBACK];
+
+  for (const key of keys) {
+    for (const ctx of CLIENT_CONTEXTS) {
+      try {
+        const player = await getPlayerResponse(videoId, ctx, key);
+        const tracks =
+          player?.captions?.playerCaptionsTracklistRenderer?.captionTracks || [];
+        if (!tracks.length) {
+          failures.push(`${ctx.name}: no caption tracks`);
+          continue;
+        }
+
+        const manual = tracks.filter((t) => t.kind !== "asr");
+        const auto = tracks.filter((t) => t.kind === "asr");
+        const track = pickPreferred(manual) || pickPreferred(auto) || tracks[0];
+
+        const segments = await fetchCaptions(track.baseUrl, ctx.userAgent);
+
+        return {
+          videoId,
+          title: player?.videoDetails?.title || "",
+          language: track.languageCode || "en",
+          generated: track.kind === "asr",
+          segments,
+        };
+      } catch (e) {
+        failures.push(`${ctx.name}: ${e.message}`);
       }
-
-      const manual = tracks.filter((t) => t.kind !== "asr");
-      const auto = tracks.filter((t) => t.kind === "asr");
-      const track = pickPreferred(manual) || pickPreferred(auto) || tracks[0];
-
-      const segments = await fetchCaptions(track.baseUrl, ctx.userAgent);
-
-      return {
-        videoId,
-        title: player?.videoDetails?.title || "",
-        language: track.languageCode || "en",
-        generated: track.kind === "asr",
-        segments,
-      };
-    } catch (e) {
-      failures.push(`${ctx.name}: ${e.message}`);
     }
   }
+
   throw new Error(
-    "No subtitles available for this video (captions may be disabled)."
+    `Could not fetch subtitles (${failures.join("; ") || "unknown reason"}).`
   );
 }
 
-async function getPlayerResponse(videoId, ctx) {
+async function getPlayerResponse(videoId, ctx, key) {
   const client = {
     clientName: ctx.clientName,
     clientVersion: ctx.clientVersion,
@@ -138,7 +163,7 @@ async function getPlayerResponse(videoId, ctx) {
   if (ctx.osVersion) client.osVersion = ctx.osVersion;
 
   const res = await fetch(
-    `https://www.youtube.com/youtubei/v1/player?key=${INNERTUBE_KEY}`,
+    `https://www.youtube.com/youtubei/v1/player?key=${key}`,
     {
       method: "POST",
       headers: {
@@ -164,7 +189,8 @@ function pickPreferred(tracks) {
 }
 
 async function fetchCaptions(baseUrl, userAgent) {
-  const res = await fetch(baseUrl + "&fmt=json3", {
+  const clean = baseUrl.replace(/[&?]fmt=[^&]*/g, "");
+  const res = await fetch(clean + (clean.includes("?") ? "&" : "?") + "fmt=json3", {
     headers: { "User-Agent": userAgent || "" },
   });
   if (!res.ok) throw new Error("Failed to download subtitles.");
