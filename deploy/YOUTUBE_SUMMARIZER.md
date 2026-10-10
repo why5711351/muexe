@@ -11,28 +11,58 @@
 前端 /api/summarize?url=...（同域，无跨域）
    ↓
 functions/api/summarize.js（Pages Function）
-   ├─ 1. 抓取字幕（手动字幕优先 → 自动字幕兜底）
+   ├─ 0. 查缓存（同视频总结过直接返回，省字幕+AI）
+   ├─ 1. 抓取字幕（Supadata 优先 → InnerTube 兜底）
    └─ 2. 调用 Workers AI（llama-4-scout-17b）生成结构化英文总结
    ↓
-返回 JSON：summary + keyPoints + chapters（带时间戳）
+返回 JSON：summary + keyPoints + chapters + thumbnail（带时间戳）
 ```
+
+> ⚠️ **重要背景**：YouTube 从 2024 年底起对数据中心 IP（含 Cloudflare Workers）收紧字幕接口，直接抓取会被风控（返回空字幕轨）。因此字幕抓取改用 **Supadata 托管 API（推荐，免费 100 次/月）作为首选源**，InnerTube 客户端级联作为兜底。
 
 ## 绑定 Workers AI（已通过 wrangler.jsonc 自动声明，无需手动后台配置 ✅）
 
-项目根目录的 `wrangler.jsonc` 已经声明了 AI 绑定：
+项目根目录的 `wrangler.jsonc` 已经声明了 AI 绑定和环境变量：
 
 ```jsonc
 {
   "name": "muexe",
   "compatibility_date": "2025-01-01",
   "pages_build_output_dir": "./dist",
-  "ai": { "binding": "AI" }
+  "ai": { "binding": "AI" },
+  "vars": { "SUPADATA_API_KEY": "" }
 }
 ```
 
 Cloudflare 构建系统（日志里的 "Checking for configuration in a Wrangler configuration file"）会读取这个文件，`git push` 后自动应用 AI 绑定，**无需在后台手动配置**。
 
 > Cloudflare Workers AI 每天有 **10,000 Neurons 免费额度**，这个工具每次总结约消耗几百 Neurons，个人使用完全够。
+
+## 配置 Supadata 字幕源（推荐，1 分钟，免费）
+
+由于 YouTube 封数据中心 IP 字幕，工具改用 Supadata 托管 API 抓字幕。**不配也能用**（会走 InnerTube 兜底，但可能被 YouTube 风控间歇性失败），配了才稳定。
+
+**第 1 步：注册拿免费 key**
+
+1. 打开 https://supadata.ai/ → 点 **Start Building Now** / **Sign up**
+2. 注册后进 Dashboard，复制你的 **API key**（免费层 100 次/月，无需信用卡）
+
+**第 2 步：把 key 填进 wrangler.jsonc**
+
+打开 `wrangler.jsonc`，把 `SUPADATA_API_KEY` 的值填成你的 key：
+
+```jsonc
+"vars": { "SUPADATA_API_KEY": "你的key" }
+```
+
+**第 3 步：push 上线**
+
+```bash
+cd /d "D:\网站\workbuddy\muexe"
+git add wrangler.jsonc && git commit -m "chore: 配置 Supadata API key" && git push origin main
+```
+
+> 也可以把 key 直接发给我，我帮你填好并 push。
 
 ### 如果 wrangler.jsonc 未自动生效（BETA 功能，兜底手动配置）
 
@@ -82,20 +112,21 @@ curl "https://muexe.com/api/summarize?url=https://www.youtube.com/watch?v=dQw4w9
 
 | 项 | 说明 |
 |---|---|
-| 字幕来源 | 手动字幕优先，无则用 YouTube 自动字幕（asr）兜底 |
+| 字幕来源 | **Supadata 托管 API 优先**（免费 100 次/月），失败或未配置时 InnerTube 客户端级联兜底 |
+| 缩略图 | 从 InnerTube 拿视频缩略图，加载失败自动回退 YouTube 稳定缩略图 |
+| 结果缓存 | 同一视频总结结果缓存 7 天，重复请求不再消耗字幕配额和 AI |
 | 总结语言 | 固定英文（面向全球流量） |
 | 总结形式 | 摘要 + 要点 + 3-8 个带时间戳章节（章节可点击跳转到视频对应时间点） |
 | 长视频 | 字幕超过约 2 万字符时只取前段，超长视频的后半部分不会被总结 |
-| 依赖 | 依赖 YouTube 公开的字幕接口，YouTube 调整可能影响（属所有同类工具的共性风险） |
-| 无字幕视频 | 无法总结，会明确提示 |
+| 无字幕视频 | Supadata 有 AI 兜底（Whisper 转写）也能总结；纯 InnerTube 兜底则无法总结 |
 
 ## 常见问题
 
 **Q：点了 Summarize 一直转圈？**
-首次调用 Workers AI 有冷启动，可能慢到 30 秒，之后会快。若超过 1 分钟，用上面的 curl 命令看后端返回什么。
+首次调用 Workers AI 有冷启动，可能慢到 30 秒，之后会快。若超过 1 分钟，用下面的 curl 命令看后端返回什么。
 
 **Q：报 "AI binding is not configured"？**
 回去做「一次性配置」那一步，`AI` 变量名别拼错。
 
-**Q：报 "No subtitles available"？**
-该视频作者关闭了字幕，换一个视频测试。大部分英文视频都有字幕。
+**Q：报 "Could not fetch subtitles (Supadata: ...; InnerTube: ...)"？**
+说明 Supadata 和 InnerTube 都失败了。先检查 `wrangler.jsonc` 里的 `SUPADATA_API_KEY` 是否填对、是否 push 生效。若 Supadata 也失败，多半是免费额度用完（100 次/月）或 key 无效。

@@ -5,5 +5,8 @@
   "pages_build_output_dir": "./dist",
   "ai": {
     "binding": "AI"
+  },
+  "vars": {
+    "SUPADATA_API_KEY": ""
   }
 }

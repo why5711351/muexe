@@ -40,10 +40,36 @@ export async function onRequestGet(context) {
     );
   }
 
+  // Cache the final summary so repeat requests for the same video never hit
+  // YouTube (or Supadata) again — this dodges datacenter-IP rate limiting and
+  // saves Supadata credits + AI Neurons.
+  const cache = caches.default;
+  const cacheKey = new Request(`https://muexe-cache/${videoId}`, { method: "GET" });
   try {
-    const transcript = await fetchTranscript(videoId);
+    const cached = await cache.match(cacheKey);
+    if (cached) return cached;
+  } catch (_) {
+    /* cache miss / unavailable — ignore */
+  }
+
+  try {
+    const transcript = await fetchTranscript(videoId, env);
     const result = await summarize(env, transcript);
-    return json(result, 200);
+    const response = json(result, 200);
+    try {
+      const cachedRes = new Response(JSON.stringify(result), {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "Access-Control-Allow-Origin": "*",
+          "Cache-Control": "public, max-age=604800",
+        },
+      });
+      await cache.put(cacheKey, cachedRes);
+    } catch (_) {
+      /* cache write failure is non-fatal */
+    }
+    return response;
   } catch (e) {
     return json({ error: e.message || "Failed to summarize this video." }, 500);
   }
@@ -123,7 +149,106 @@ async function fetchWatchConfig(videoId) {
   };
 }
 
-async function fetchTranscript(videoId) {
+// Supadata (hosted transcript API) is the primary caption source: it runs from
+// YouTube-friendly IPs and is immune to the datacenter-IP caption stripping that
+// breaks the InnerTube clients below. We fall back to InnerTube only when no
+// Supadata key is configured or Supadata fails.
+async function fetchTranscript(videoId, env) {
+  const supadataKey = (env && env.SUPADATA_API_KEY) || "";
+
+  // Title / thumbnail come from InnerTube's videoDetails, which usually survives
+  // even when captionTracks are stripped. Fall back to a stable URL if it fails.
+  let meta = {
+    title: "",
+    thumbnail: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+  };
+  try {
+    meta = await fetchMeta(videoId);
+  } catch (_) {
+    /* keep fallback values */
+  }
+
+  let segments = null;
+  let language = "en";
+  let generated = false;
+  let lastError = "";
+
+  if (supadataKey) {
+    try {
+      const sup = await fetchSupadataTranscript(videoId, supadataKey);
+      segments = sup.segments;
+      language = sup.language;
+      generated = sup.generated;
+    } catch (e) {
+      lastError = `Supadata: ${e.message}`;
+    }
+  }
+
+  if (!segments) {
+    try {
+      const inner = await fetchInnerTubeTranscript(videoId);
+      segments = inner.segments;
+      language = inner.language;
+      generated = inner.generated;
+      if (inner.title && !meta.title) meta.title = inner.title;
+      if (inner.thumbnail) meta.thumbnail = inner.thumbnail;
+    } catch (e) {
+      throw new Error(
+        lastError ? `${lastError}; InnerTube: ${e.message}` : e.message
+      );
+    }
+  }
+
+  return {
+    videoId,
+    title: meta.title || "YouTube video",
+    thumbnail: meta.thumbnail,
+    language,
+    generated,
+    segments,
+  };
+}
+
+async function fetchSupadataTranscript(videoId, apiKey) {
+  const url =
+    `https://api.supadata.ai/v1/transcript?url=${encodeURIComponent(
+      `https://www.youtube.com/watch?v=${videoId}`
+    )}&text=false`;
+  const res = await fetch(url, { headers: { "x-api-key": apiKey } });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  const content = Array.isArray(data.content) ? data.content : [];
+  const segments = content
+    .filter((c) => c && c.text && String(c.text).trim())
+    .map((c) => ({
+      text: String(c.text).trim(),
+      start: (c.offset || 0) / 1000,
+      duration: (c.duration || 0) / 1000,
+    }));
+  if (!segments.length) throw new Error("empty transcript");
+  return { language: data.lang || "en", generated: false, segments };
+}
+
+async function fetchMeta(videoId) {
+  const ctx = CLIENT_CONTEXTS[0]; // ANDROID_VR
+  const player = await getPlayerResponse(
+    videoId,
+    ctx,
+    INNERTUBE_KEY_FALLBACK,
+    null
+  );
+  return {
+    title: player?.videoDetails?.title || "",
+    thumbnail: pickThumbnail(videoId, player),
+  };
+}
+
+// InnerTube clients (ANDROID_VR -> ANDROID -> IOS -> WEB). WEB caption URLs are
+// PO-token gated and ANDROID_VR needs no PO token at all, so we prefer it first.
+// Hardcoded INNERTUBE keys expire, so we fetch a fresh key + visitorData from the
+// watch page, then walk each client through the full player -> track -> download
+// pipeline and return on the first that succeeds.
+async function fetchInnerTubeTranscript(videoId) {
   const failures = [];
 
   let watchCfg = null;
@@ -155,7 +280,6 @@ async function fetchTranscript(videoId) {
         const segments = await fetchCaptions(track.baseUrl, ctx.userAgent);
 
         return {
-          videoId,
           title: player?.videoDetails?.title || "",
           thumbnail: pickThumbnail(videoId, player),
           language: track.languageCode || "en",
