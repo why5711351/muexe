@@ -256,8 +256,30 @@ ${full}`;
     max_tokens: 2048,
   });
 
-  const raw =
-    typeof response === "string" ? response : response?.response || "";
+  // Extract the model's text output, tolerating several response shapes:
+  // string, {response: string}, {response: object}, {choices:[...]}, etc.
+  let raw = "";
+  if (typeof response === "string") {
+    raw = response;
+  } else if (response && typeof response === "object") {
+    const candidates = [
+      response.response,
+      response.output_text,
+      response.text,
+      response.choices?.[0]?.message?.content,
+    ];
+    for (const c of candidates) {
+      if (typeof c === "string") {
+        raw = c;
+        break;
+      }
+      if (c && typeof c === "object") {
+        raw = JSON.stringify(c);
+        break;
+      }
+    }
+  }
+
   const parsed = parseJson(raw);
 
   return {
@@ -265,7 +287,10 @@ ${full}`;
     title: transcript.title,
     language: transcript.language,
     generated: transcript.generated,
-    summary: parsed.summary || "No summary generated.",
+    summary:
+      typeof parsed.summary === "string"
+        ? parsed.summary
+        : "No summary generated.",
     keyPoints: Array.isArray(parsed.keyPoints) ? parsed.keyPoints : [],
     chapters: Array.isArray(parsed.chapters) ? parsed.chapters : [],
   };
