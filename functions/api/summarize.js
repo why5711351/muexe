@@ -62,7 +62,7 @@ export async function onRequestGet(context) {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
           "Access-Control-Allow-Origin": "*",
-          "Cache-Control": "public, max-age=604800",
+          "Cache-Control": "public, max-age=2592000",
         },
       });
       await cache.put(cacheKey, cachedRes);
@@ -149,15 +149,19 @@ async function fetchWatchConfig(videoId) {
   };
 }
 
-// Supadata (hosted transcript API) is the primary caption source: it runs from
-// YouTube-friendly IPs and is immune to the datacenter-IP caption stripping that
-// breaks the InnerTube clients below. We fall back to InnerTube only when no
-// Supadata key is configured or Supadata fails.
+// Caption sources, tried in order of value per free credit:
+//   1. ChocoData — free 1,000 req/mo, residential IPs (immune to the datacenter-IP
+//                   caption stripping that breaks InnerTube), ~97% success from
+//                   Cloudflare Workers.
+//   2. Supadata  — free 100/mo, adds AI fallback for captionless videos.
+//   3. InnerTube — free, but YouTube intermittently strips captions for datacenter
+//                   IPs, so it is the last resort.
+// Title / thumbnail always come from InnerTube's videoDetails (survives even when
+// captionTracks are stripped); fall back to a stable i.ytimg.com URL if it fails.
 async function fetchTranscript(videoId, env) {
+  const chocoKey = (env && env.CHOCO_API_KEY) || "";
   const supadataKey = (env && env.SUPADATA_API_KEY) || "";
 
-  // Title / thumbnail come from InnerTube's videoDetails, which usually survives
-  // even when captionTracks are stripped. Fall back to a stable URL if it fails.
   let meta = {
     title: "",
     thumbnail: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
@@ -171,16 +175,27 @@ async function fetchTranscript(videoId, env) {
   let segments = null;
   let language = "en";
   let generated = false;
-  let lastError = "";
+  const errors = [];
 
-  if (supadataKey) {
+  if (chocoKey) {
+    try {
+      const choco = await fetchChocoTranscript(videoId, chocoKey);
+      segments = choco.segments;
+      language = choco.language;
+      generated = choco.generated;
+    } catch (e) {
+      errors.push(`ChocoData: ${e.message}`);
+    }
+  }
+
+  if (!segments && supadataKey) {
     try {
       const sup = await fetchSupadataTranscript(videoId, supadataKey);
       segments = sup.segments;
       language = sup.language;
       generated = sup.generated;
     } catch (e) {
-      lastError = `Supadata: ${e.message}`;
+      errors.push(`Supadata: ${e.message}`);
     }
   }
 
@@ -193,10 +208,14 @@ async function fetchTranscript(videoId, env) {
       if (inner.title && !meta.title) meta.title = inner.title;
       if (inner.thumbnail) meta.thumbnail = inner.thumbnail;
     } catch (e) {
-      throw new Error(
-        lastError ? `${lastError}; InnerTube: ${e.message}` : e.message
-      );
+      errors.push(`InnerTube: ${e.message}`);
     }
+  }
+
+  if (!segments) {
+    throw new Error(
+      errors.length ? errors.join("; ") : "Could not fetch subtitles."
+    );
   }
 
   return {
@@ -205,6 +224,35 @@ async function fetchTranscript(videoId, env) {
     thumbnail: meta.thumbnail,
     language,
     generated,
+    segments,
+  };
+}
+
+// ChocoData transcript endpoint. Free tier: 1,000 requests/month. Runs from
+// residential IPs, so it succeeds from Cloudflare's datacenter IPs where the
+// InnerTube clients below get caption-stripped. Timestamps are milliseconds.
+async function fetchChocoTranscript(videoId, apiKey) {
+  const params = new URLSearchParams({
+    api_key: apiKey,
+    video_id: videoId,
+    query: `https://www.youtube.com/watch?v=${videoId}`,
+  });
+  const res = await fetch(
+    `https://api.chocodata.com/api/v1/youtube/transcript?${params}`
+  );
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  const segments = (Array.isArray(data.segments) ? data.segments : [])
+    .filter((s) => s && s.text && String(s.text).trim())
+    .map((s) => ({
+      text: String(s.text).trim(),
+      start: (s.start || 0) / 1000,
+      duration: (s.duration || 0) / 1000,
+    }));
+  if (!segments.length) throw new Error("empty transcript");
+  return {
+    language: data.language || "en",
+    generated: !!data.is_generated,
     segments,
   };
 }
