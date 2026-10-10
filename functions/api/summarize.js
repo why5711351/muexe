@@ -58,66 +58,89 @@ function json(payload, status) {
 // ----------------------------------------------------------------------------
 const CLIENT_CONTEXTS = [
   {
+    name: "ANDROID_VR",
+    clientName: "ANDROID_VR",
+    clientVersion: "1.71.26",
+    deviceMake: "Oculus",
+    deviceModel: "Quest 3",
+    androidSdkVersion: 32,
+    osName: "Android",
+    osVersion: "12L",
+    userAgent:
+      "com.google.android.apps.youtube.vr.oculus/1.71.26 (Linux; U; Android 12L; eureka-user Build/SQ3A.220605.009.A1) gzip",
+    clientHeader: "28",
+  },
+  {
     name: "ANDROID",
     clientName: "ANDROID",
-    clientVersion: "20.10.38",
+    clientVersion: "21.02.35",
     androidSdkVersion: 30,
-    userAgent: "com.google.android.youtube/20.10.38 (Linux; U; Android 14) gzip",
+    osName: "Android",
+    osVersion: "11",
+    userAgent: "com.google.android.youtube/21.02.35 (Linux; U; Android 11) gzip",
     clientHeader: "3",
   },
   {
     name: "IOS",
     clientName: "IOS",
-    clientVersion: "19.29.37",
+    clientVersion: "21.02.3",
     deviceMake: "Apple",
     deviceModel: "iPhone16,2",
-    osName: "iOS",
-    osVersion: "18.1.0",
+    osName: "iPhone",
+    osVersion: "18.3.2.22D82",
     userAgent:
-      "com.google.ios.youtube/19.29.37 (iPhone; CPU iPhone OS 18_1 like Mac OS X)",
+      "com.google.ios.youtube/21.02.3 (iPhone16,2; U; CPU iOS 18_3_2 like Mac OS X;)",
     clientHeader: "5",
   },
   {
     name: "WEB",
     clientName: "WEB",
-    clientVersion: "2.20250101.00.00",
-    userAgent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+    clientVersion: "2.20260115.01.00",
+    userAgent: BROWSER_UA,
     clientHeader: "1",
   },
 ];
 
 // YouTube WEB-client caption URLs became Proof-of-Origin (PO) token gated in
-// mid-2025 and now download empty bodies, while the ANDROID / IOS clients still
-// return signed, token-free caption URLs. Hardcoded INNERTUBE keys expire, so we
-// fetch a fresh key from the watch page, then walk each client through the full
-// player -> track -> download pipeline and return on the first that succeeds.
-async function fetchInnertubeKey(videoId) {
+// mid-2025 and now download empty bodies, while the ANDROID_VR / ANDROID / IOS
+// clients still return signed, token-free caption URLs. ANDROID_VR is preferred:
+// it does not require a PO token at all (yt-dlp marks it REQUIRE_PO_TOKEN: False).
+// Hardcoded INNERTUBE keys expire, so we fetch a fresh key + visitorData from the
+// watch page (visitorData helps avoid datacenter-IP caption-stripping), then walk
+// each client through the full player -> track -> download pipeline and return on
+// the first that succeeds.
+async function fetchWatchConfig(videoId) {
   const res = await fetch(`https://www.youtube.com/watch?v=${videoId}`, {
     headers: { "User-Agent": BROWSER_UA, "Accept-Language": "en-US,en;q=0.9" },
   });
   if (!res.ok) throw new Error(`watch page HTTP ${res.status}`);
   const html = await res.text();
-  const m = html.match(/"INNERTUBE_API_KEY":"([^"]+)"/);
-  if (!m) throw new Error("INNERTUBE_API_KEY not found");
-  return m[1];
+  const keyMatch = html.match(/"INNERTUBE_API_KEY":"([^"]+)"/);
+  const visitorMatch = html.match(/"visitorData":"([^"]+)"/);
+  return {
+    key: keyMatch ? keyMatch[1] : null,
+    visitorData: visitorMatch ? visitorMatch[1] : null,
+  };
 }
 
 async function fetchTranscript(videoId) {
   const failures = [];
 
-  let dynamicKey = null;
+  let watchCfg = null;
   try {
-    dynamicKey = await fetchInnertubeKey(videoId);
+    watchCfg = await fetchWatchConfig(videoId);
   } catch (e) {
     failures.push(`key: ${e.message}`);
   }
-  const keys = dynamicKey ? [dynamicKey, INNERTUBE_KEY_FALLBACK] : [INNERTUBE_KEY_FALLBACK];
+  const keys = watchCfg?.key
+    ? [watchCfg.key, INNERTUBE_KEY_FALLBACK]
+    : [INNERTUBE_KEY_FALLBACK];
+  const visitorData = watchCfg?.visitorData || null;
 
   for (const key of keys) {
     for (const ctx of CLIENT_CONTEXTS) {
       try {
-        const player = await getPlayerResponse(videoId, ctx, key);
+        const player = await getPlayerResponse(videoId, ctx, key, visitorData);
         const tracks =
           player?.captions?.playerCaptionsTracklistRenderer?.captionTracks || [];
         if (!tracks.length) {
@@ -150,7 +173,7 @@ async function fetchTranscript(videoId) {
   );
 }
 
-async function getPlayerResponse(videoId, ctx, key) {
+async function getPlayerResponse(videoId, ctx, key, visitorData) {
   const client = {
     clientName: ctx.clientName,
     clientVersion: ctx.clientVersion,
@@ -163,6 +186,9 @@ async function getPlayerResponse(videoId, ctx, key) {
   if (ctx.osName) client.osName = ctx.osName;
   if (ctx.osVersion) client.osVersion = ctx.osVersion;
 
+  const context = { client };
+  if (visitorData) context.visitorData = visitorData;
+
   const res = await fetch(
     `https://www.youtube.com/youtubei/v1/player?key=${key}`,
     {
@@ -174,7 +200,7 @@ async function getPlayerResponse(videoId, ctx, key) {
         "X-YouTube-Client-Version": ctx.clientVersion,
         Origin: "https://www.youtube.com",
       },
-      body: JSON.stringify({ context: { client }, videoId }),
+      body: JSON.stringify({ context, videoId }),
     }
   );
   if (!res.ok) {
