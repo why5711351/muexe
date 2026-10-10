@@ -382,6 +382,18 @@ label { font-weight: 600; font-size: .9rem; display: block; margin-bottom: 6px; 
 }
 .note { font-size: .82rem; color: var(--muted); margin-top: 8px; }
 
+.yt-thumb-wrap { margin-bottom: 16px; }
+.yt-thumb {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  display: block;
+  background: #f1f5f9;
+}
+
 /* Prose content */
 .prose { max-width: 760px; }
 .prose h2 { margin: 28px 0 12px; }

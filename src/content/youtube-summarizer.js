@@ -22,6 +22,15 @@
   function render(data) {
     var html = '';
 
+    if (data.thumbnail) {
+      var vid = data.videoId || '';
+      html += '<div class="yt-thumb-wrap">';
+      html += '<img class="yt-thumb" src="' + escapeHtml(data.thumbnail) + '" alt="' + escapeHtml(data.title || 'Video thumbnail') + '" loading="lazy"';
+      html += ' onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/' + vid + '/hqdefault.jpg\';"';
+      html += '>';
+      html += '</div>';
+    }
+
     html += '<h3 style="margin-bottom:10px">' + escapeHtml(data.title || 'Video summary') + '</h3>';
 
     html += '<div class="result-box"><strong>Summary</strong>';

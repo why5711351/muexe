@@ -134,6 +134,7 @@ async function fetchTranscript(videoId) {
         return {
           videoId,
           title: player?.videoDetails?.title || "",
+          thumbnail: pickThumbnail(videoId, player),
           language: track.languageCode || "en",
           generated: track.kind === "asr",
           segments,
@@ -186,6 +187,15 @@ function pickPreferred(tracks) {
   if (!tracks.length) return null;
   const en = tracks.find((t) => (t.languageCode || "").startsWith("en"));
   return en || tracks[0];
+}
+
+function pickThumbnail(videoId, player) {
+  const thumbs = player?.videoDetails?.thumbnail?.thumbnails;
+  if (Array.isArray(thumbs) && thumbs.length) {
+    const best = thumbs[thumbs.length - 1];
+    if (best?.url) return best.url;
+  }
+  return `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 }
 
 async function fetchCaptions(baseUrl, userAgent) {
@@ -285,6 +295,7 @@ ${full}`;
   return {
     videoId: transcript.videoId,
     title: transcript.title,
+    thumbnail: transcript.thumbnail,
     language: transcript.language,
     generated: transcript.generated,
     summary:
