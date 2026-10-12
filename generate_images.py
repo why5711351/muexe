@@ -11,6 +11,7 @@ IMG = ROOT / "assets" / "img"
 
 data = json.loads((SRC / "tools.json").read_text(encoding="utf-8"))
 tools = data["tools"]
+categories = data["categories"]
 
 BLUE = (37, 99, 235)
 BLUE_DARK = (30, 64, 175)
@@ -76,6 +77,28 @@ def make_og(t=None):
     return img
 
 
+def make_cat_og(c):
+    W, H = 1200, 630
+    img = Image.new("RGB", (W, H), BLUE)
+    d = ImageDraw.Draw(img, "RGBA")
+    d.ellipse([880, -140, 1340, 320], fill=(255, 255, 255, 18))
+    d.ellipse([-180, 420, 200, 800], fill=(255, 255, 255, 14))
+    d.ellipse([1000, 430, 1260, 690], fill=(255, 255, 255, 22))
+    d.rounded_rectangle([60, 50, 92, 82], radius=8, fill=WHITE)
+    d.text((76, 66), "M", font=font(24, True), fill=BLUE, anchor="mm")
+    d.text((108, 66), "Muexe", font=font(30, True), fill=WHITE, anchor="lm")
+    title = c["label"]
+    f_title = font(64, True) if len(title) < 24 else font(54, True)
+    lines = wrap(d, title, f_title, 1000)
+    y = 260
+    for ln in lines:
+        centered(d, ln, f_title, WHITE, W // 2, y)
+        y += 74
+    centered(d, "Free · No sign-up · Runs in your browser", font(28), (219, 234, 254), W // 2, 540)
+    d.text((60, 590), "muexe.com", font=font(24, True), fill=(191, 219, 254), anchor="lm")
+    return img
+
+
 def make_pin(t):
     W, H = 1000, 1500
     img = Image.new("RGB", (W, H), WHITE)
@@ -114,10 +137,12 @@ def main():
     pin_dir.mkdir(parents=True, exist_ok=True)
 
     make_og(None).save(og_dir / "og-home.png")
+    for c in categories:
+        make_cat_og(c).save(og_dir / f'cat-{c.get("slug", c["key"])}.png')
     for t in tools:
         make_og(t).save(og_dir / f'{t["slug"]}.png')
         make_pin(t).save(pin_dir / f'{t["slug"]}.png')
-    print(f"[OK] Generated 1 home OG + {len(tools)} tool OG + {len(tools)} pin images")
+    print(f"[OK] Generated 1 home OG + {len(categories)} category OG + {len(tools)} tool OG + {len(tools)} pin images")
 
 
 if __name__ == "__main__":

@@ -8,10 +8,62 @@
     "keywords": "free online tools, web tools, image to pdf, image compressor, json formatter, bmi calculator, mortgage calculator, word counter"
   },
   "categories": [
-    { "key": "converters", "label": "Converters" },
-    { "key": "image", "label": "Image Tools" },
-    { "key": "calculators", "label": "Calculators" },
-    { "key": "text", "label": "Text & Developer" }
+    {
+      "key": "converters",
+      "label": "Converters",
+      "slug": "converters",
+      "title": "Free Online File & Image Converters | Muexe",
+      "description": "Convert files online for free — JPG to PNG, images to PDF and more. No sign-up, no uploads, files stay in your browser.",
+      "intro": "Convert files between formats instantly, right in your browser. These tools run 100% locally, so your files never leave your device — no uploads, no accounts, no watermarks.",
+      "faq": [
+        { "q": "Is it free to convert files on Muexe?", "a": "Yes. Every converter is 100% free with no hidden limits, watermarks or account requirements." },
+        { "q": "Are my files uploaded to a server when I convert them?", "a": "No. All conversion happens locally in your browser using JavaScript, so your files never leave your device." },
+        { "q": "Which formats can I convert?", "a": "You can convert images between JPG, PNG and WebP, and combine multiple images into a single PDF. More formats are added regularly." },
+        { "q": "Do I need to install any software?", "a": "No. Everything runs in your browser on desktop or mobile — no downloads or installation required." }
+      ]
+    },
+    {
+      "key": "image",
+      "label": "Image Tools",
+      "slug": "image-tools",
+      "title": "Free Online Image Tools — Compress & Resize | Muexe",
+      "description": "Compress, resize and optimize images online for free. Reduce file size for web and email without losing quality — private and fast.",
+      "intro": "Optimize images for the web, email and social media without installing anything. Compress to shrink file size or resize to exact dimensions — all processed locally for privacy.",
+      "faq": [
+        { "q": "Will compressing an image reduce its quality?", "a": "You control the quality level. Lower settings reduce file size more, while higher settings preserve detail — the preview shows exactly what you will get." },
+        { "q": "What image formats are supported?", "a": "JPG, PNG and WebP can be compressed, and images can be resized to your exact pixel dimensions." },
+        { "q": "Are my images private?", "a": "Yes. Images are processed entirely in your browser and never uploaded to a server." },
+        { "q": "Is there a file size limit?", "a": "There is no hard limit, though very large images may take slightly longer depending on your device's available memory." }
+      ]
+    },
+    {
+      "key": "calculators",
+      "label": "Calculators",
+      "slug": "calculators",
+      "title": "Free Online Calculators — BMI, Mortgage, Date & More | Muexe",
+      "description": "Free online calculators for BMI, mortgage payments, dates and percentages. Accurate, private and instant — no sign-up needed.",
+      "intro": "Get instant answers for everyday calculations — from body mass index and mortgage payments to date differences and percentages. Every calculator runs locally, so nothing you type is stored or shared.",
+      "faq": [
+        { "q": "Are these calculators accurate?", "a": "They use standard formulas (such as the standard BMI and mortgage amortization formulas) and are kept up to date." },
+        { "q": "Are my inputs saved or shared?", "a": "No. Calculations run locally in your browser; nothing you type is stored or sent to a server." },
+        { "q": "Can I use these calculators for financial decisions?", "a": "They are for general reference. Mortgage and percentage results are estimates — always confirm with a qualified advisor before making financial decisions." },
+        { "q": "Do I need an account?", "a": "No account or sign-up is needed. Just open a calculator and start." }
+      ]
+    },
+    {
+      "key": "text",
+      "label": "Text & Developer",
+      "slug": "developer-tools",
+      "title": "Free Text & Developer Tools — JSON, Word Count & More | Muexe",
+      "description": "Free developer and text tools: format JSON, count words, convert case and summarize YouTube videos. Fast, private and browser-based.",
+      "intro": "Everyday tools for writing, coding and content work. Format and validate JSON, count words, switch text case, or summarize a YouTube video — all locally, no data leaves your device.",
+      "faq": [
+        { "q": "Is the JSON formatter safe for sensitive data?", "a": "Yes. JSON is formatted entirely in your browser and never sent to a server." },
+        { "q": "What developer tools are available?", "a": "A JSON formatter and validator, a word counter, a case converter, and a YouTube video summarizer." },
+        { "q": "Does the YouTube summarizer work for all videos?", "a": "It works for most public videos with captions. Videos without captions may not produce a summary." },
+        { "q": "Are these tools free?", "a": "Yes. All text and developer tools are completely free." }
+      ]
+    }
   ],
   "tools": [
     {

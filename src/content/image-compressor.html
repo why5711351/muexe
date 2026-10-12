@@ -14,11 +14,11 @@
       <option value="image/webp">WebP</option>
     </select>
   </div>
-  <div class="result-box" id="ic-result" style="display:none">
+  <div class="result-box" id="ic-result" aria-live="polite" style="display:none">
     <p><strong id="ic-size-orig"></strong></p>
     <p><strong id="ic-size-new"></strong></p>
     <img id="ic-preview" alt="Compressed preview" style="max-width:100%;border-radius:8px;margin-top:10px">
   </div>
   <button class="btn" id="ic-download" type="button" style="display:none">Download compressed image</button>
-  <p class="note" id="ic-status"></p>
+  <p class="note" id="ic-status" role="status"></p>
 </div>

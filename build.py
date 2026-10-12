@@ -54,11 +54,11 @@ def build_nav() -> str:
     for c in categories:
         items = tools_by_cat.get(c["key"], [])
         links = "".join(
-            f'<a href="/{t["slug"]}.html">{t["name"]}</a>' for t in items
+            f'<a href="/{t["slug"]}">{t["name"]}</a>' for t in items
         )
         parts.append(
             f'<div class="has-dropdown">'
-            f'<a class="dropdown-toggle" href="#{c["key"]}">{c["label"]} ▾</a>'
+            f'<a class="dropdown-toggle" href="/{c.get("slug", c["key"])}">{c["label"]} ▾</a>'
             f'<div class="dropdown-menu">{links}</div></div>'
         )
     return "".join(parts)
@@ -70,11 +70,11 @@ def render_header() -> str:
 
 def render_footer() -> str:
     cat_links = "".join(
-        f'<a href="/#{c["key"]}">{c["label"]}</a>' for c in categories
+        f'<a href="/{c.get("slug", c["key"])}">{c["label"]}</a>' for c in categories
     )
     popular = tools[:6]
     pop_links = "".join(
-        f'<a href="/{t["slug"]}.html">{t["name"]}</a>' for t in popular
+        f'<a href="/{t["slug"]}">{t["name"]}</a>' for t in popular
     )
     return (
         FOOTER_TPL.replace("{{FOOTER_CATEGORIES}}", cat_links)
@@ -128,7 +128,7 @@ def json_ld_tool(t) -> str:
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": t["name"],
-        "url": f'{SITE_URL}/{t["slug"]}.html',
+        "url": f'{SITE_URL}/{t["slug"]}',
         "description": t["description"],
         "applicationCategory": "UtilityApplication",
         "operatingSystem": "Any",
@@ -141,9 +141,9 @@ def json_ld_tool(t) -> str:
         "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL + "/"},
             {"@type": "ListItem", "position": 2, "name": cat_map[t["category"]]["label"],
-             "item": f'{SITE_URL}/#{t["category"]}'},
+             "item": f'{SITE_URL}/{cat_map[t["category"]].get("slug", t["category"])}'},
             {"@type": "ListItem", "position": 3, "name": t["name"],
-             "item": f'{SITE_URL}/{t["slug"]}.html'},
+             "item": f'{SITE_URL}/{t["slug"]}'},
         ],
     }
     faq = {
@@ -178,12 +178,12 @@ def og_image(t=None) -> str:
     return f'{SITE_URL}/assets/img/og/og-home.png'
 
 
-def seo_head(t=None, is_home=False, title=None, desc=None, canonical=None) -> str:
+def seo_head(t=None, is_home=False, title=None, desc=None, canonical=None, og_img=None) -> str:
     t_title = title or (t["title"] if t else site["title"])
     t_desc = desc or (t["description"] if t else site["description"])
     t_keywords = (t["keywords"] if t else site["keywords"])
-    t_canonical = canonical or (f'{SITE_URL}/{t["slug"]}.html' if t else SITE_URL + "/")
-    t_og_img = og_image(t if t else None)
+    t_canonical = canonical or (f'{SITE_URL}/{t["slug"]}' if t else SITE_URL + "/")
+    t_og_img = og_img or og_image(t if t else None)
     return f"""
 <title>{t_title}</title>
 <meta name="description" content="{t_desc}">
@@ -218,7 +218,7 @@ def seo_head(t=None, is_home=False, title=None, desc=None, canonical=None) -> st
 
 
 def social_share(t) -> str:
-    url = quote(f'{SITE_URL}/{t["slug"]}.html', safe='')
+    url = quote(f'{SITE_URL}/{t["slug"]}', safe='')
     pin_img = quote(f'{SITE_URL}/assets/img/pin/{t["slug"]}.png', safe='')
     desc = quote(t["description"], safe='')
     title = quote(t["name"], safe='')
@@ -235,7 +235,7 @@ def breadcrumb_html(t) -> str:
     return (
         '<nav class="breadcrumb" aria-label="Breadcrumb">'
         f'<a href="/">Home</a><span class="sep">›</span>'
-        f'<a href="/#{t["category"]}">{cat["label"]}</a><span class="sep">›</span>'
+        f'<a href="/{cat.get("slug", t["category"])}">{cat["label"]}</a><span class="sep">›</span>'
         f'<span>{t["name"]}</span></nav>'
     )
 
@@ -263,7 +263,7 @@ def related_tools(t) -> str:
     if not related:
         return ""
     links = "".join(
-        f'<li><a href="/{r["slug"]}.html">{r["name"]}</a> — {r["short_desc"]}</li>'
+        f'<li><a href="/{r["slug"]}">{r["name"]}</a> — {r["short_desc"]}</li>'
         for r in related
     )
     return (
@@ -357,7 +357,7 @@ def home_page() -> str:
         items = tools_by_cat.get(c["key"], [])
         cards = "".join(
             f'<div class="tool-card cat-{c["key"]}"><div class="tc-icon">{t["icon"]}</div>'
-            f'<h3><a href="/{t["slug"]}.html">{t["name"]}</a></h3>'
+            f'<h3><a href="/{t["slug"]}">{t["name"]}</a></h3>'
             f'<p>{t["short_desc"]}</p></div>'
             for t in items
         )
@@ -384,13 +384,21 @@ def home_page() -> str:
         "@type": "ItemList",
         "itemListElement": [
             {"@type": "ListItem", "position": i + 1, "name": t["name"],
-             "url": f'{SITE_URL}/{t["slug"]}.html'}
+             "url": f'{SITE_URL}/{t["slug"]}'}
             for i, t in enumerate(tools)
         ],
     }, ensure_ascii=False)
+    org_jsonld = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": site["name"],
+        "url": SITE_URL,
+        "logo": f'{SITE_URL}/assets/img/favicon.svg',
+        "description": site["description"],
+    }, ensure_ascii=False)
 
     hero_cats = "".join(
-        f'<a href="#{c["key"]}">{c["label"]}</a>' for c in categories
+        f'<a href="/{c.get("slug", c["key"])}">{c["label"]}</a>' for c in categories
     )
     body = f"""
 <header class="hero">
@@ -407,6 +415,7 @@ def home_page() -> str:
         "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n"
         + seo_head(is_home=True)
         + f'<script type="application/ld+json">{web_jsonld}</script>'
+        + f'<script type="application/ld+json">{org_jsonld}</script>'
         + f'<script type="application/ld+json">{list_jsonld}</script>'
         + "\n</head>\n<body>\n"
         + render_header()
@@ -418,7 +427,7 @@ def home_page() -> str:
 
 
 def static_page(title, desc, slug, body_html) -> str:
-    canonical = f"{SITE_URL}/{slug}.html"
+    canonical = f"{SITE_URL}/{slug}"
     head = seo_head(title=title, desc=desc, canonical=canonical)
     body = f'<main class="container tool-main"><div class="prose" style="max-width:800px"><h1>{title}</h1>{body_html}</div></main>'
     return (
@@ -491,8 +500,9 @@ def build_static_pages():
 # ----------------------------------------------------------------------------
 def build_sitemap() -> str:
     urls = [SITE_URL + "/"]
-    urls += [f'{SITE_URL}/{t["slug"]}.html' for t in tools]
-    urls += [f"{SITE_URL}/{p}.html" for p in ["about", "privacy", "terms", "contact"]]
+    urls += [f'{SITE_URL}/{c.get("slug", c["key"])}' for c in categories]
+    urls += [f'{SITE_URL}/{t["slug"]}' for t in tools]
+    urls += [f"{SITE_URL}/{p}" for p in ["about", "privacy", "terms", "contact"]]
     entries = "".join(
         f"<url><loc>{u}</loc><lastmod>{date.today().isoformat()}</lastmod>"
         f"<changefreq>weekly</changefreq><priority>{'1.0' if u.endswith('/') else '0.8'}</priority></url>"
@@ -518,6 +528,124 @@ def build_search_index() -> str:
     return json.dumps(idx, ensure_ascii=False)
 
 
+def category_page(c) -> str:
+    """Standalone category hub page with real editorial value: an intro, a tool
+    comparison table, FAQ and cross-links — not just a copy of the home cards."""
+    items = tools_by_cat.get(c["key"], [])
+    slug = c.get("slug", c["key"])
+    cat_title = c.get("title") or f'{c["label"]} — Free Online Tools | Muexe'
+    cat_desc = c.get("description", "")
+    intro = c.get("intro", "")
+
+    cards = "".join(
+        f'<div class="tool-card cat-{c["key"]}"><div class="tc-icon">{t["icon"]}</div>'
+        f'<h3><a href="/{t["slug"]}">{t["name"]}</a></h3>'
+        f'<p>{t["short_desc"]}</p></div>'
+        for t in items
+    )
+
+    rows = "".join(
+        f'<tr><td><a href="/{t["slug"]}">{t["name"]}</a></td>'
+        f'<td>{t["short_desc"]}</td></tr>'
+        for t in items
+    )
+    table = (
+        '<table class="cat-table"><thead><tr><th>Tool</th><th>What it does</th></tr>'
+        f'</thead><tbody>{rows}</tbody></table>'
+    )
+
+    faqs = "".join(
+        f'<details><summary>{q["q"]}</summary><p>{q["a"]}</p></details>'
+        for q in c.get("faq", [])
+    )
+
+    other = "".join(
+        f'<li><a href="/{x.get("slug", x["key"])}">{x["label"]}</a></li>'
+        for x in categories if x["key"] != c["key"]
+    )
+
+    breadcrumb = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL + "/"},
+            {"@type": "ListItem", "position": 2, "name": c["label"], "item": f'{SITE_URL}/{slug}'},
+        ],
+    }, ensure_ascii=False)
+    collection = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": c["label"],
+        "url": f'{SITE_URL}/{slug}',
+        "description": cat_desc,
+        "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": i + 1, "name": t["name"],
+                 "url": f'{SITE_URL}/{t["slug"]}'}
+                for i, t in enumerate(items)
+            ],
+        },
+    }, ensure_ascii=False)
+
+    body = f"""
+<main class="container tool-main">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">›</span><span>{c["label"]}</span>
+  </nav>
+  <div class="tool-head">
+    <h1>{c["label"]}</h1>
+    <p class="lead">{intro}</p>
+  </div>
+
+  <div class="tools-grid">{cards}</div>
+
+  <section class="cat-compare">
+    <h2>Compare {c["label"].lower()}</h2>
+    {table}
+  </section>
+
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    {faqs}
+  </section>
+
+  <section class="related-tools">
+    <h2>Browse other categories</h2>
+    <ul>{other}</ul>
+  </section>
+</main>
+"""
+    return (
+        "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n"
+        + seo_head(title=cat_title, desc=cat_desc, canonical=f'{SITE_URL}/{slug}',
+                   og_img=f'{SITE_URL}/assets/img/og/cat-{slug}.png')
+        + f'<script type="application/ld+json">{breadcrumb}</script>'
+        + f'<script type="application/ld+json">{collection}</script>'
+        + "\n</head>\n<body>\n"
+        + render_header()
+        + body
+        + render_footer()
+        + '<script src="/assets/js/main.js"></script>\n'
+        + "\n</body>\n</html>\n"
+    )
+
+
+def build_redirects() -> str:
+    """301 .html → clean URL for every page so old/crawled URLs collapse onto
+    the canonical extensionless form (Cloudflare Pages also serves these
+    extensionless URLs from the .html files via its pretty-URL handling)."""
+    lines = []
+    lines.append("/index.html  /  301")
+    for c in categories:
+        lines.append(f'/{c.get("slug", c["key"])}.html  /{c.get("slug", c["key"])}  301')
+    for t in tools:
+        lines.append(f'/{t["slug"]}.html  /{t["slug"]}  301')
+    for p in ["about", "privacy", "terms", "contact"]:
+        lines.append(f"/{p}.html  /{p}  301")
+    return "\n".join(lines) + "\n"
+
+
 # ----------------------------------------------------------------------------
 # Main
 # ----------------------------------------------------------------------------
@@ -526,6 +654,10 @@ def main():
         shutil.rmtree(DIST)
     DIST.mkdir(parents=True)
     shutil.copytree(ASSETS, DIST / "assets")
+
+    # category pages
+    for c in categories:
+        (DIST / f'{c.get("slug", c["key"])}.html').write_text(category_page(c), encoding="utf-8")
 
     # tool pages
     for t in tools:
@@ -542,9 +674,10 @@ def main():
     (DIST / "sitemap.xml").write_text(build_sitemap(), encoding="utf-8")
     (DIST / "robots.txt").write_text(build_robots(), encoding="utf-8")
     (DIST / "assets" / "search.json").write_text(build_search_index(), encoding="utf-8")
+    (DIST / "_redirects").write_text(build_redirects(), encoding="utf-8")
 
-    print(f"[OK] Built {len(tools)} tool pages + home + static pages into {DIST}")
-    print(f"[OK] sitemap.xml, robots.txt, search.json generated")
+    print(f"[OK] Built {len(tools)} tool pages + {len(categories)} category pages + home + static pages into {DIST}")
+    print(f"[OK] sitemap.xml, robots.txt, search.json, _redirects generated")
 
 
 if __name__ == "__main__":

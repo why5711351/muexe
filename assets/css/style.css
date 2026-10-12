@@ -331,7 +331,9 @@ h3 { font-size: 1.08rem; }
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  min-height: 44px;
   padding: 11px 22px;
   background: var(--primary);
   color: #fff;
@@ -355,6 +357,7 @@ h3 { font-size: 1.08rem; }
 
 input[type="text"], input[type="number"], input[type="file"], textarea, select {
   width: 100%;
+  min-height: 44px;
   padding: 11px 14px;
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -547,4 +550,38 @@ label { font-weight: 600; font-size: .9rem; display: block; margin-bottom: 6px; 
   .tools-grid { grid-template-columns: 1fr; }
   .hero h1 { font-size: 1.85rem; }
   .hero p.sub { font-size: 1.02rem; }
+}
+
+/* ============ Category pages ============ */
+.cat-compare { margin-top: 34px; }
+.cat-compare h2 { margin-bottom: 16px; }
+.cat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .92rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.cat-table thead th {
+  text-align: left;
+  padding: 12px 14px;
+  background: var(--bg-soft);
+  color: var(--text);
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+}
+.cat-table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--bg-soft);
+  color: var(--text-soft);
+  vertical-align: top;
+}
+.cat-table tbody tr:last-child td { border-bottom: none; }
+.cat-table tbody td a { color: var(--primary); font-weight: 600; }
+.cat-table tbody td a:hover { color: var(--primary-dark); text-decoration: underline; }
+
+@media (max-width: 520px) {
+  .cat-table { display: block; overflow-x: auto; white-space: nowrap; }
 }

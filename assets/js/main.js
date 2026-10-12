@@ -34,7 +34,7 @@
         box.innerHTML = '<div class="sr-empty">No tools found for "' + escapeHtml(q) + '"</div>';
       } else {
         box.innerHTML = hits.map(function (t) {
-          return '<a href="/' + t.slug + '.html">' + t.icon + ' <span>' + escapeHtml(t.name) +
+          return '<a href="/' + t.slug + '">' + t.icon + ' <span>' + escapeHtml(t.name) +
             ' <span class="sr-cat">' + t.category + '</span></span></a>';
         }).join('');
       }
