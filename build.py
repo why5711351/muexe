@@ -22,7 +22,7 @@ DIST = ROOT / "dist"
 SITE_URL = "https://muexe.com"
 ADSENSE_CLIENT = ""          # e.g. "ca-pub-1234567890123456" (leave empty = placeholder)
 ADSENSE_SLOT = ""            # e.g. "0000000000"
-GA_ID = ""                   # e.g. "G-XXXXXXXXXX" (optional)
+GA_ID = "G-DDDXLQK1N1"       # Google Analytics 4 Measurement ID
 YEAR = str(date.today().year)
 
 # ----------------------------------------------------------------------------
