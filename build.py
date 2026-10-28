@@ -23,6 +23,7 @@ SITE_URL = "https://muexe.com"
 ADSENSE_CLIENT = ""          # e.g. "ca-pub-1234567890123456" (leave empty = placeholder)
 ADSENSE_SLOT = ""            # e.g. "0000000000"
 GA_ID = "G-DDDXLQK1N1"       # Google Analytics 4 Measurement ID
+INDEXNOW_KEY = "d9b51c2aeece41c6b16a94cd2ecb0328"  # IndexNow key (Bing/Yandex instant indexing)
 YEAR = str(date.today().year)
 
 # ----------------------------------------------------------------------------
@@ -675,9 +676,11 @@ def main():
     (DIST / "robots.txt").write_text(build_robots(), encoding="utf-8")
     (DIST / "assets" / "search.json").write_text(build_search_index(), encoding="utf-8")
     (DIST / "_redirects").write_text(build_redirects(), encoding="utf-8")
+    # IndexNow key file (verifies ownership for Bing/Yandex instant indexing)
+    (DIST / f"{INDEXNOW_KEY}.txt").write_text(INDEXNOW_KEY + "\n", encoding="utf-8")
 
     print(f"[OK] Built {len(tools)} tool pages + {len(categories)} category pages + home + static pages into {DIST}")
-    print(f"[OK] sitemap.xml, robots.txt, search.json, _redirects generated")
+    print(f"[OK] sitemap.xml, robots.txt, search.json, _redirects, {INDEXNOW_KEY}.txt generated")
 
 
 if __name__ == "__main__":
