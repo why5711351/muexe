@@ -1,0 +1,22 @@
+<div class="tool-widget">
+  <div class="form-row">
+    <label for="qr-text">Text or URL</label>
+    <textarea id="qr-text" placeholder="Enter text or a URL to encode…"></textarea>
+  </div>
+  <div class="form-row">
+    <label for="qr-size">Size: <span id="qr-size-label">300</span>px</label>
+    <input type="range" id="qr-size" min="150" max="600" step="30" value="300">
+  </div>
+  <div class="form-row">
+    <label>Colors</label>
+    <div style="display:flex;align-items:center;gap:12px">
+      <input type="color" id="qr-fg" value="#000000" title="Foreground color">
+      <input type="color" id="qr-bg" value="#ffffff" title="Background color">
+    </div>
+  </div>
+  <button class="btn btn-primary" id="qr-gen" type="button">Generate QR Code</button>
+  <div style="margin-top:14px;text-align:center">
+    <div id="qr-result" aria-live="polite"></div>
+    <a class="btn btn-secondary" id="qr-download" style="display:none;margin-top:10px">Download PNG</a>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="tool-widget">
+  <div class="form-row">
+    <label for="p2j-file">Choose a PNG image</label>
+    <input type="file" id="p2j-file" accept="image/*">
+  </div>
+  <div class="form-row">
+    <label for="p2j-bg">Background color (for transparent areas)</label>
+    <input type="color" id="p2j-bg" value="#ffffff">
+  </div>
+  <div class="form-row">
+    <label for="p2j-quality">Quality: <span id="p2j-q-label">90</span></label>
+    <input type="range" id="p2j-quality" min="10" max="100" value="90">
+  </div>
+  <canvas id="p2j-canvas" style="max-width:100%;border:1px solid #e5e7eb;border-radius:8px;display:none"></canvas>
+  <button class="btn btn-primary" id="p2j-download" type="button" style="margin-top:12px">Download JPG</button>
+</div>

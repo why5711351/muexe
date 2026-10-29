@@ -1,0 +1,19 @@
+<div class="tool-widget">
+  <div class="form-row">
+    <label for="uuid-count">Number of UUIDs</label>
+    <input type="number" id="uuid-count" min="1" max="100" value="1">
+  </div>
+  <div class="form-row">
+    <label>Format</label>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <label><input type="radio" name="uuid-case" value="lower" checked> lowercase</label>
+      <label><input type="radio" name="uuid-case" value="upper"> UPPERCASE</label>
+    </div>
+  </div>
+  <button class="btn btn-primary" id="uuid-gen" type="button">Generate UUIDs</button>
+  <div class="form-row" style="margin-top:14px">
+    <label for="uuid-output">Result</label>
+    <textarea id="uuid-output" readonly rows="6" placeholder="Your UUIDs will appear here…" aria-live="polite"></textarea>
+  </div>
+  <button class="btn btn-secondary" id="uuid-copy" type="button">Copy result</button>
+</div>

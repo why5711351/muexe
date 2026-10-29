@@ -1,0 +1,12 @@
+<div class="tool-widget">
+  <div class="form-row">
+    <label for="ic-file">Choose an image</label>
+    <input type="file" id="ic-file" accept="image/*">
+  </div>
+  <p class="hint">Drag over the image to draw a selection, then click Crop &amp; Download.</p>
+  <div id="ic-wrap" style="position:relative;display:none;margin-top:10px;touch-action:none">
+    <img id="ic-img" alt="Image to crop" style="max-width:100%;display:block;user-select:none">
+    <div id="ic-sel" style="position:absolute;border:2px dashed #fff;box-shadow:0 0 0 9999px rgba(0,0,0,0.4);display:none;pointer-events:none"></div>
+  </div>
+  <button class="btn btn-primary" id="ic-crop" type="button" disabled style="margin-top:12px">Crop &amp; Download</button>
+</div>

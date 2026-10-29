@@ -16,10 +16,22 @@
       "description": "Convert files online for free — JPG to PNG, images to PDF and more. No sign-up, no uploads, files stay in your browser.",
       "intro": "Convert files between formats instantly, right in your browser. These tools run 100% locally, so your files never leave your device — no uploads, no accounts, no watermarks.",
       "faq": [
-        { "q": "Is it free to convert files on Muexe?", "a": "Yes. Every converter is 100% free with no hidden limits, watermarks or account requirements." },
-        { "q": "Are my files uploaded to a server when I convert them?", "a": "No. All conversion happens locally in your browser using JavaScript, so your files never leave your device." },
-        { "q": "Which formats can I convert?", "a": "You can convert images between JPG, PNG and WebP, and combine multiple images into a single PDF. More formats are added regularly." },
-        { "q": "Do I need to install any software?", "a": "No. Everything runs in your browser on desktop or mobile — no downloads or installation required." }
+        {
+          "q": "Is it free to convert files on Muexe?",
+          "a": "Yes. Every converter is 100% free with no hidden limits, watermarks or account requirements."
+        },
+        {
+          "q": "Are my files uploaded to a server when I convert them?",
+          "a": "No. All conversion happens locally in your browser using JavaScript, so your files never leave your device."
+        },
+        {
+          "q": "Which formats can I convert?",
+          "a": "You can convert images between JPG, PNG and WebP, and combine multiple images into a single PDF. More formats are added regularly."
+        },
+        {
+          "q": "Do I need to install any software?",
+          "a": "No. Everything runs in your browser on desktop or mobile — no downloads or installation required."
+        }
       ]
     },
     {
@@ -30,10 +42,22 @@
       "description": "Compress, resize and optimize images online for free. Reduce file size for web and email without losing quality — private and fast.",
       "intro": "Optimize images for the web, email and social media without installing anything. Compress to shrink file size or resize to exact dimensions — all processed locally for privacy.",
       "faq": [
-        { "q": "Will compressing an image reduce its quality?", "a": "You control the quality level. Lower settings reduce file size more, while higher settings preserve detail — the preview shows exactly what you will get." },
-        { "q": "What image formats are supported?", "a": "JPG, PNG and WebP can be compressed, and images can be resized to your exact pixel dimensions." },
-        { "q": "Are my images private?", "a": "Yes. Images are processed entirely in your browser and never uploaded to a server." },
-        { "q": "Is there a file size limit?", "a": "There is no hard limit, though very large images may take slightly longer depending on your device's available memory." }
+        {
+          "q": "Will compressing an image reduce its quality?",
+          "a": "You control the quality level. Lower settings reduce file size more, while higher settings preserve detail — the preview shows exactly what you will get."
+        },
+        {
+          "q": "What image formats are supported?",
+          "a": "JPG, PNG and WebP can be compressed, and images can be resized to your exact pixel dimensions."
+        },
+        {
+          "q": "Are my images private?",
+          "a": "Yes. Images are processed entirely in your browser and never uploaded to a server."
+        },
+        {
+          "q": "Is there a file size limit?",
+          "a": "There is no hard limit, though very large images may take slightly longer depending on your device's available memory."
+        }
       ]
     },
     {
@@ -44,10 +68,22 @@
       "description": "Free online calculators for BMI, mortgage payments, dates and percentages. Accurate, private and instant — no sign-up needed.",
       "intro": "Get instant answers for everyday calculations — from body mass index and mortgage payments to date differences and percentages. Every calculator runs locally, so nothing you type is stored or shared.",
       "faq": [
-        { "q": "Are these calculators accurate?", "a": "They use standard formulas (such as the standard BMI and mortgage amortization formulas) and are kept up to date." },
-        { "q": "Are my inputs saved or shared?", "a": "No. Calculations run locally in your browser; nothing you type is stored or sent to a server." },
-        { "q": "Can I use these calculators for financial decisions?", "a": "They are for general reference. Mortgage and percentage results are estimates — always confirm with a qualified advisor before making financial decisions." },
-        { "q": "Do I need an account?", "a": "No account or sign-up is needed. Just open a calculator and start." }
+        {
+          "q": "Are these calculators accurate?",
+          "a": "They use standard formulas (such as the standard BMI and mortgage amortization formulas) and are kept up to date."
+        },
+        {
+          "q": "Are my inputs saved or shared?",
+          "a": "No. Calculations run locally in your browser; nothing you type is stored or sent to a server."
+        },
+        {
+          "q": "Can I use these calculators for financial decisions?",
+          "a": "They are for general reference. Mortgage and percentage results are estimates — always confirm with a qualified advisor before making financial decisions."
+        },
+        {
+          "q": "Do I need an account?",
+          "a": "No account or sign-up is needed. Just open a calculator and start."
+        }
       ]
     },
     {
@@ -58,10 +94,22 @@
       "description": "Free developer and text tools: format JSON, count words, convert case and summarize YouTube videos. Fast, private and browser-based.",
       "intro": "Everyday tools for writing, coding and content work. Format and validate JSON, count words, switch text case, or summarize a YouTube video — all locally, no data leaves your device.",
       "faq": [
-        { "q": "Is the JSON formatter safe for sensitive data?", "a": "Yes. JSON is formatted entirely in your browser and never sent to a server." },
-        { "q": "What developer tools are available?", "a": "A JSON formatter and validator, a word counter, a case converter, and a YouTube video summarizer." },
-        { "q": "Does the YouTube summarizer work for all videos?", "a": "It works for most public videos with captions. Videos without captions may not produce a summary." },
-        { "q": "Are these tools free?", "a": "Yes. All text and developer tools are completely free." }
+        {
+          "q": "Is the JSON formatter safe for sensitive data?",
+          "a": "Yes. JSON is formatted entirely in your browser and never sent to a server."
+        },
+        {
+          "q": "What developer tools are available?",
+          "a": "A JSON formatter and validator, a word counter, a case converter, and a YouTube video summarizer."
+        },
+        {
+          "q": "Does the YouTube summarizer work for all videos?",
+          "a": "It works for most public videos with captions. Videos without captions may not produce a summary."
+        },
+        {
+          "q": "Are these tools free?",
+          "a": "Yes. All text and developer tools are completely free."
+        }
       ]
     }
   ],
@@ -665,6 +713,467 @@
         {
           "q": "Is my data uploaded anywhere?",
           "a": "The video link and its transcript are processed by a serverless function to generate the summary. No account is created and nothing is stored long-term."
+        }
+      ]
+    },
+    {
+      "slug": "uuid-generator",
+      "name": "UUID Generator",
+      "icon": "🆔",
+      "category": "text",
+      "title": "UUID Generator – Free Online UUID v4 & GUID Tool | Muexe",
+      "description": "Generate random UUID v4 and GUID strings online for free. Create single or bulk UUIDs with uppercase/lowercase options — instant, private, no sign-up.",
+      "keywords": "uuid generator, generate uuid, uuid v4 generator, guid generator, random uuid generator, bulk uuid generator, online uuid",
+      "short_desc": "Generate random UUID v4 and GUID strings — single or in bulk.",
+      "lead": "Generate cryptographically secure UUID v4 (GUID) strings instantly. Create one or generate up to 100 at once, switch between lowercase and uppercase, and copy them with a single click.",
+      "solves": "Generate unique identifiers (UUID v4 / GUID) instantly for databases, APIs, file names and session tokens. Instead of hand-rolling IDs that risk collisions, you get standards-compliant, cryptographically random identifiers in one click — singly or in bulk.",
+      "how_works": "UUIDs are generated in your browser using the Web Crypto API, the same secure random source used by modern operating systems. Each UUID follows the RFC 4122 version 4 format, where most of the 128 bits are random. You can generate one or a batch, choose upper or lower case, and copy the result directly.",
+      "assumptions": "The tool generates version 4 UUIDs (random), which is what most applications need. If you require version 1 (time-based) or version 5 (name-based) UUIDs, use a library that supports those formats.",
+      "features": [
+        "Cryptographically secure UUID v4 / GUID",
+        "Generate a single UUID or a batch of up to 100",
+        "Uppercase / lowercase toggle and one-click copy"
+      ],
+      "how_to_use": [
+        "Choose how many UUIDs you need (1 to 100).",
+        "Pick lowercase or uppercase output.",
+        "Click Generate and copy the result."
+      ],
+      "faq": [
+        {
+          "q": "What is a UUID?",
+          "a": "A Universally Unique Identifier is a 128-bit value used to identify information without a central authority. Version 4 UUIDs are generated randomly and are effectively unique."
+        },
+        {
+          "q": "Is UUID v4 guaranteed to be unique?",
+          "a": "Collisions are astronomically unlikely. With 122 random bits, you would need to generate billions of UUIDs before a realistic chance of collision."
+        },
+        {
+          "q": "Is my data sent to a server?",
+          "a": "No. UUIDs are generated entirely in your browser using the Web Crypto API, so nothing leaves your device."
+        },
+        {
+          "q": "What is the difference between UUID and GUID?",
+          "a": "They are essentially the same thing. GUID is Microsoft's name for the same 128-bit identifier format that UUID describes."
+        },
+        {
+          "q": "How many UUIDs can I generate at once?",
+          "a": "Up to 100 in a single batch, which is enough for seeding test data, database records or API keys."
+        }
+      ]
+    },
+    {
+      "slug": "password-generator",
+      "name": "Password Generator",
+      "icon": "🔐",
+      "category": "text",
+      "title": "Password Generator – Create Strong Random Passwords Free | Muexe",
+      "description": "Generate strong, random passwords online for free. Customize length and character types (uppercase, lowercase, numbers, symbols) — secure, private and generated locally in your browser.",
+      "keywords": "password generator, strong password generator, random password generator, secure password generator, create strong password, free password generator",
+      "short_desc": "Create strong, random passwords with custom length and character types.",
+      "lead": "Generate strong, unpredictable passwords in one click. Choose the length and which character types to include — uppercase, lowercase, numbers and symbols — and copy a password that is genuinely hard to crack.",
+      "solves": "Create strong, unique passwords without reusing weak ones. It removes the temptation of predictable passwords by generating truly random ones from a cryptographically secure source, with controls for length and the exact character types you need.",
+      "how_works": "Passwords are generated locally using the Web Crypto API for cryptographically secure randomness. You pick the length and toggle uppercase, lowercase, numbers and symbols; the generator guarantees at least one character from each selected set and shuffles the result. Nothing is ever transmitted or stored.",
+      "assumptions": "Password strength comes mainly from length and true randomness. The generator does not store or remember passwords — use a password manager to keep them safe.",
+      "features": [
+        "Cryptographically secure randomness",
+        "Adjustable length from 4 to 64 characters",
+        "Toggle uppercase, lowercase, numbers and symbols"
+      ],
+      "how_to_use": [
+        "Set your desired password length.",
+        "Choose which character types to include.",
+        "Click Generate and copy the password."
+      ],
+      "faq": [
+        {
+          "q": "How long should a strong password be?",
+          "a": "At least 12–16 characters. Length matters more than complexity — every extra character dramatically increases the time needed to crack it."
+        },
+        {
+          "q": "Are the passwords stored anywhere?",
+          "a": "No. Passwords are generated locally in your browser and never transmitted or saved. Nothing is kept after you close the page."
+        },
+        {
+          "q": "Should I use symbols in my password?",
+          "a": "Symbols help, but length and randomness matter more. Include symbols when a site requires them, but a long passphrase can be just as secure."
+        },
+        {
+          "q": "What makes a password strong?",
+          "a": "A combination of length (12+ characters), true randomness, and a mix of character types that makes brute-force and dictionary attacks impractical."
+        },
+        {
+          "q": "How do I remember all my passwords?",
+          "a": "Use a password manager. Generate a unique password here for each site and let the manager store and autofill them securely."
+        }
+      ]
+    },
+    {
+      "slug": "base64-encoder",
+      "name": "Base64 Encoder & Decoder",
+      "icon": "🔣",
+      "category": "text",
+      "title": "Base64 Encoder & Decoder – Encode Decode Online Free | Muexe",
+      "description": "Encode and decode Base64 online for free. Convert text to Base64 and back with full UTF-8 support — instant, private and works entirely in your browser.",
+      "keywords": "base64 encoder, base64 decoder, base64 encode decode, base64 to text, text to base64, base64 online",
+      "short_desc": "Encode text to Base64 or decode it back — with full UTF-8 support.",
+      "lead": "Convert text to Base64 and back in an instant. Whether you need to encode a string for a URL, an API call or data embedding, this tool handles it with correct UTF-8 support for non-ASCII characters.",
+      "solves": "Encode and decode Base64 strings without writing code or hunting for a command line. It handles the UTF-8 pitfall that trips up simple encoders — where accented letters and emoji get corrupted — by encoding text as bytes first, then decoding back to the original text.",
+      "how_works": "Encoding converts your text to UTF-8 bytes, then maps those bytes to the Base64 alphabet. Decoding reverses the process back to the original text. All conversion runs locally in your browser, so your data never leaves your device.",
+      "assumptions": "The tool treats input as UTF-8 text, so characters from any language and emoji round-trip correctly. For Base64 that represents raw binary (not text), the decoded output will show replacement characters where bytes are not valid text.",
+      "features": [
+        "Encode and decode in both directions",
+        "Full UTF-8 support for accents and emoji",
+        "Runs locally — nothing is uploaded"
+      ],
+      "how_to_use": [
+        "Paste or type your text into the input box.",
+        "Click Encode to convert to Base64, or Decode to convert back.",
+        "Copy the result with one click."
+      ],
+      "faq": [
+        {
+          "q": "What is Base64 used for?",
+          "a": "Base64 encodes binary data as text so it can be safely embedded in URLs, JSON, emails and other text-only formats."
+        },
+        {
+          "q": "Is Base64 encryption?",
+          "a": "No. Base64 is an encoding, not encryption — it provides no security and can be decoded by anyone. It is for data transport, not secrecy."
+        },
+        {
+          "q": "Why does my Base64 string not decode correctly?",
+          "a": "It may be missing padding characters (=), contain whitespace, or represent raw binary rather than UTF-8 text. The decoder handles standard padded Base64."
+        },
+        {
+          "q": "Does this support non-English text?",
+          "a": "Yes. It encodes text as UTF-8 bytes first, so accented characters, Chinese, Japanese and emoji all round-trip correctly."
+        },
+        {
+          "q": "Is my data uploaded to a server?",
+          "a": "No. All encoding and decoding happens locally in your browser."
+        }
+      ]
+    },
+    {
+      "slug": "url-encoder",
+      "name": "URL Encoder & Decoder",
+      "icon": "🔗",
+      "category": "text",
+      "title": "URL Encoder & Decoder – URL Encode Decode Online Free | Muexe",
+      "description": "Encode and decode URLs online for free. Convert text to percent-encoded URLs and back — perfect for query strings, links and APIs. Instant and private.",
+      "keywords": "url encoder, url decoder, url encode decode, percent encoding, url encode online, decode url",
+      "short_desc": "Encode text to a URL-safe format or decode percent-encoded URLs.",
+      "lead": "Encode text into URL-safe percent-encoding or decode it back to plain text. Perfect for building query strings, fixing broken links and working with APIs — all instantly in your browser.",
+      "solves": "Convert text to and from percent-encoded URL format. It fixes the everyday problem of spaces, ampersands and non-ASCII characters breaking URLs, and lets you decode messy percent-encoded links back into readable text.",
+      "how_works": "Encoding replaces reserved and non-ASCII characters with a percent sign followed by their UTF-8 byte value (for example, a space becomes %20). Decoding reverses the process. Everything runs locally in your browser, so nothing is sent anywhere.",
+      "assumptions": "The tool uses the component encoding rules (encodeURIComponent), which is what query-string values and form fields need. It preserves characters that are safe in URLs and encodes everything else, with correct UTF-8 handling for any language.",
+      "features": [
+        "Encode and decode in both directions",
+        "Correct percent-encoding for query strings",
+        "Full UTF-8 support for any language"
+      ],
+      "how_to_use": [
+        "Paste your text or URL into the input box.",
+        "Click Encode or Decode.",
+        "Copy the result with one click."
+      ],
+      "faq": [
+        {
+          "q": "When should I URL-encode text?",
+          "a": "When inserting values into a URL's query string, especially text that contains spaces, &, =, ? or non-ASCII characters, so the link stays valid."
+        },
+        {
+          "q": "What is percent-encoding?",
+          "a": "It represents characters that are not URL-safe using a percent sign followed by their byte value — for example, a space becomes %20."
+        },
+        {
+          "q": "Does URL encoding encrypt data?",
+          "a": "No. Encoding only makes text safe for use in a URL. It provides no security or secrecy."
+        },
+        {
+          "q": "What is the difference between encoding a URL and its components?",
+          "a": "Encoding a full URL preserves structure like :// and &, while component encoding (used here) encodes everything for safe use inside query-string values."
+        },
+        {
+          "q": "Does it support non-English characters?",
+          "a": "Yes. Non-ASCII characters are encoded as their UTF-8 byte sequence, so URLs with any language round-trip correctly."
+        }
+      ]
+    },
+    {
+      "slug": "age-calculator",
+      "name": "Age Calculator",
+      "icon": "🎂",
+      "category": "calculators",
+      "title": "Age Calculator – How Old Am I? Years, Months & Days | Muexe",
+      "description": "Calculate your exact age in years, months and days with our free age calculator. Also get total days, weeks and your next birthday countdown. Instant and accurate.",
+      "keywords": "age calculator, how old am i, calculate age, age in years months days, birthday calculator, age difference",
+      "short_desc": "Find your exact age in years, months and days — plus your next birthday.",
+      "lead": "Enter your date of birth to see your exact age in years, months and days. Also get your total age in days and weeks, and find out how long until your next birthday.",
+      "solves": "Calculate your exact age down to the day, plus the total days and weeks you have been alive and the countdown to your next birthday. It removes the mental arithmetic of leap years and month lengths, giving a precise answer instantly.",
+      "how_works": "The tool compares your date of birth with today's date using calendar arithmetic, correctly accounting for leap years and variable month lengths. It breaks the difference into years, months and days, then converts it to total days and weeks and computes the time until your next birthday.",
+      "assumptions": "Age is calculated using calendar dates, so the exact day matters. The tool uses your device's current date; if that is wrong, the result will be off by the same amount.",
+      "features": [
+        "Exact age in years, months and days",
+        "Total days and weeks you have lived",
+        "Countdown to your next birthday"
+      ],
+      "how_to_use": [
+        "Pick your date of birth.",
+        "The result updates instantly.",
+        "See your exact age, totals and next birthday."
+      ],
+      "faq": [
+        {
+          "q": "How is age calculated in years, months and days?",
+          "a": "The tool counts full years first, then the remaining full months, then the leftover days — correctly handling leap years and different month lengths."
+        },
+        {
+          "q": "Does it account for leap years?",
+          "a": "Yes. The calculator uses real calendar dates, so leap years are handled automatically for accurate results."
+        },
+        {
+          "q": "Can I calculate someone else's age?",
+          "a": "Yes. Enter any date of birth to calculate that person's exact age and next birthday."
+        },
+        {
+          "q": "What does 'next birthday' countdown mean?",
+          "a": "It shows how many days remain until your birthday in the upcoming year, counting from today's date."
+        },
+        {
+          "q": "Is my birth date stored anywhere?",
+          "a": "No. The calculation runs entirely in your browser and nothing is saved or sent to a server."
+        }
+      ]
+    },
+    {
+      "slug": "tip-calculator",
+      "name": "Tip Calculator",
+      "icon": "💵",
+      "category": "calculators",
+      "title": "Tip Calculator – Calculate Tip & Split the Bill Free | Muexe",
+      "description": "Calculate the right tip amount and split the bill evenly with our free tip calculator. Choose 10%, 15%, 18% or 20%, or enter a custom tip. Instant and easy.",
+      "keywords": "tip calculator, how much to tip, tip percentage calculator, split bill calculator, restaurant tip calculator, tip amount",
+      "short_desc": "Work out the tip, total bill and how much each person should pay.",
+      "lead": "Enter your bill amount, choose a tip percentage and the number of people, and instantly see the tip amount, the total bill and how much each person owes — perfect for splitting restaurant bills.",
+      "solves": "Figure out how much to tip and how to split the bill fairly. It removes the awkward mental math at the table by instantly calculating the tip amount, the total including tip, and each person's share for any group size.",
+      "how_works": "The tool multiplies your bill by the tip percentage to get the tip amount, adds it to the bill for the total, and divides the total by the number of people for a per-person share. Results update instantly as you change any value.",
+      "assumptions": "The tool splits the bill evenly and assumes the tip percentage applies to the pre-tax bill, which is the common convention. You can enter a custom percentage for any tipping norm.",
+      "features": [
+        "Preset tip rates (10%, 15%, 18%, 20%) plus custom",
+        "Split the bill across any number of people",
+        "Instant results with no sign-up"
+      ],
+      "how_to_use": [
+        "Enter your bill amount.",
+        "Choose a tip percentage or enter a custom one.",
+        "Set the number of people to see each person's share."
+      ],
+      "faq": [
+        {
+          "q": "How much should I tip?",
+          "a": "Common norms are 15–20% in the United States and Canada, while tipping customs vary widely elsewhere. Use a preset or enter a custom percentage that matches local practice."
+        },
+        {
+          "q": "Should I tip on the pre-tax or post-tax amount?",
+          "a": "Convention is to tip on the pre-tax amount, but many people tip on the total including tax. This calculator lets you enter either as the bill amount."
+        },
+        {
+          "q": "How do I split the bill fairly?",
+          "a": "Enter the total bill and the number of people. The tool divides the total evenly, including the tip, so everyone pays the same share."
+        },
+        {
+          "q": "Does the tip percentage include service charge?",
+          "a": "No. If a service charge is already added, reduce your tip accordingly. This calculator applies the tip to the amount you enter."
+        },
+        {
+          "q": "Can I enter a custom tip amount instead of a percentage?",
+          "a": "This tool works by percentage. For a fixed dollar tip, add that amount to the bill yourself and split the result."
+        }
+      ]
+    },
+    {
+      "slug": "loan-calculator",
+      "name": "Loan Calculator",
+      "icon": "🏦",
+      "category": "calculators",
+      "title": "Loan Calculator – Free Monthly Payment & Interest Tool | Muexe",
+      "description": "Calculate your monthly loan payment, total interest and full amortization schedule with our free loan calculator. Works for personal, auto and student loans.",
+      "keywords": "loan calculator, personal loan calculator, loan payment calculator, amortization calculator, auto loan calculator, monthly payment calculator, interest calculator",
+      "short_desc": "Calculate monthly payments, total interest and an amortization schedule.",
+      "lead": "Enter your loan amount, interest rate and term to see your monthly payment, total interest and total repayment. Works for personal, auto, student and most fixed-rate installment loans.",
+      "solves": "Calculate the monthly payment, total interest and total repayment for a fixed-rate installment loan. It helps you compare loan offers and budget by showing exactly what a given amount, rate and term will cost over time.",
+      "how_works": "The tool uses the standard amortization formula to compute your monthly payment from the loan amount, annual interest rate and term. It then sums the interest across all payments to show total interest, and builds a month-by-month schedule showing how each payment splits between principal and interest.",
+      "assumptions": "Results assume a fixed interest rate, monthly compounding and equal monthly payments for the full term. Fees, insurance, variable rates and early repayment are not included, so treat the output as an estimate.",
+      "features": [
+        "Monthly payment and total interest at a glance",
+        "Full amortization schedule",
+        "Works for personal, auto and student loans"
+      ],
+      "how_to_use": [
+        "Enter the loan amount, annual interest rate and term in years.",
+        "View your monthly payment, total interest and total repayment.",
+        "Scroll the amortization table to see the year-by-year breakdown."
+      ],
+      "faq": [
+        {
+          "q": "How is the monthly loan payment calculated?",
+          "a": "It uses the standard amortization formula: the payment is derived from the loan amount, monthly interest rate and number of payments so the loan is paid off exactly at the end of the term."
+        },
+        {
+          "q": "What is the difference between principal and interest?",
+          "a": "Principal is the amount you borrowed; interest is the cost of borrowing. Each payment covers some of each, and early payments are mostly interest."
+        },
+        {
+          "q": "Does this work for auto and student loans?",
+          "a": "Yes. Any fixed-rate installment loan with equal monthly payments can be calculated with this tool."
+        },
+        {
+          "q": "Why is my payment different from the lender's quote?",
+          "a": "Lenders add fees, insurance and may compound differently. This calculator shows principal and interest only, so use it as an estimate."
+        },
+        {
+          "q": "Does the calculator include fees or taxes?",
+          "a": "No. It covers principal and interest only. Add origination fees, taxes and insurance separately for a complete picture."
+        }
+      ],
+      "disclaimer": "This loan calculator is for informational and educational purposes only and does not constitute financial, legal or lending advice. Actual terms depend on your lender, credit profile and fees. Always consult a qualified financial advisor or lender before making borrowing decisions."
+    },
+    {
+      "slug": "png-to-jpg",
+      "name": "PNG to JPG Converter",
+      "icon": "🎨",
+      "category": "image",
+      "title": "PNG to JPG Converter – Convert PNG to JPEG Online Free | Muexe",
+      "description": "Convert PNG images to JPG online for free. Choose a background color for transparent areas and adjust quality — private, fast and no upload required.",
+      "keywords": "png to jpg, convert png to jpg, png to jpeg converter, change png to jpg, png to jpg online",
+      "short_desc": "Convert PNG to JPG with a background fill for transparent areas.",
+      "lead": "Convert PNG images to the smaller JPG format in one click. Choose a background color for any transparent areas and adjust the quality to balance file size and clarity.",
+      "solves": "Convert PNG images to JPG when you need a smaller file or a format without transparency. Because JPG cannot store transparency, this tool fills transparent areas with a color you choose — white by default — so your image looks correct everywhere.",
+      "how_works": "Your PNG is loaded and drawn onto a canvas over a background color you select, which replaces any transparent areas. The canvas is then re-encoded as a JPG at the quality level you set. Everything runs locally in your browser, so the image never leaves your device.",
+      "assumptions": "Converting to JPG usually reduces file size but adds lossy compression, and transparency is replaced by your chosen background color. The output keeps the original pixel dimensions.",
+      "features": [
+        "Choose a background color for transparent areas",
+        "Adjustable JPG quality slider",
+        "Processed locally — no upload, fully private"
+      ],
+      "how_to_use": [
+        "Choose a PNG image from your device.",
+        "Pick a background color and quality level.",
+        "Click Download JPG to save it."
+      ],
+      "faq": [
+        {
+          "q": "Why convert PNG to JPG?",
+          "a": "JPG files are usually much smaller than PNG, making them better for photos, email and web pages. JPG is also required by some websites and print services."
+        },
+        {
+          "q": "What happens to transparent areas?",
+          "a": "JPG does not support transparency, so transparent areas are filled with your chosen background color — white by default."
+        },
+        {
+          "q": "Will the image lose quality?",
+          "a": "JPG uses lossy compression, so there is some quality loss, which you control with the quality slider. Higher quality means larger files and sharper images."
+        },
+        {
+          "q": "Is my image uploaded to a server?",
+          "a": "No. Conversion happens entirely in your browser, so your image never leaves your device."
+        },
+        {
+          "q": "Can I convert JPG back to PNG?",
+          "a": "Yes. Use the JPG to PNG Converter on this site to convert in the opposite direction."
+        }
+      ]
+    },
+    {
+      "slug": "image-cropper",
+      "name": "Image Cropper",
+      "icon": "✂️",
+      "category": "image",
+      "title": "Image Cropper – Crop Images Online Free | Muexe",
+      "description": "Crop images online for free. Drag to select the exact area and download the cropped image instantly — private, no upload, works in your browser.",
+      "keywords": "crop image, image cropper, crop photo online, crop picture, image crop tool, cut image",
+      "short_desc": "Drag to select an area and crop any image instantly.",
+      "lead": "Crop any image to the exact area you want. Drag over the picture to draw a selection, then download just that region — no need for Photoshop or any software.",
+      "solves": "Crop images to remove unwanted edges, focus on a subject or fit a specific aspect ratio. It replaces heavyweight editors for the simple, everyday task of trimming a photo to just the part you need.",
+      "how_works": "Your image loads locally and you drag a rectangle over the area to keep. The tool maps that rectangle back to the original image resolution, so the crop stays sharp, then outputs the selected region as a new image. Nothing is uploaded at any point.",
+      "assumptions": "The tool crops a rectangular region. For fixed aspect ratios or rounded corners, crop first and then resize or mask separately. The output is saved at the original resolution of the selected area.",
+      "features": [
+        "Drag to select the exact crop region",
+        "Cropped at full original resolution",
+        "Processed locally — fully private"
+      ],
+      "how_to_use": [
+        "Choose an image from your device.",
+        "Drag over the picture to draw your selection.",
+        "Click Crop & Download to save the result."
+      ],
+      "faq": [
+        {
+          "q": "How do I crop an image online?",
+          "a": "Upload an image, then drag a rectangle over the area you want to keep. Click Crop & Download to save just that region."
+        },
+        {
+          "q": "Does cropping reduce image quality?",
+          "a": "The selected area is saved at its original resolution, so there is no quality loss from the crop itself."
+        },
+        {
+          "q": "Can I crop to a specific aspect ratio?",
+          "a": "This tool uses a free-form rectangle. For an exact ratio, crop roughly and then use the Image Resizer to set precise dimensions."
+        },
+        {
+          "q": "Is my image uploaded anywhere?",
+          "a": "No. Cropping happens entirely in your browser, so your image never leaves your device."
+        },
+        {
+          "q": "Which formats can I crop?",
+          "a": "Any image your browser can open — JPG, PNG, WebP and more — can be cropped and downloaded as a PNG."
+        }
+      ]
+    },
+    {
+      "slug": "qr-code-generator",
+      "name": "QR Code Generator",
+      "icon": "📱",
+      "category": "image",
+      "title": "QR Code Generator – Create QR Codes Online Free | Muexe",
+      "description": "Create custom QR codes online for free. Turn any URL or text into a scannable QR code with custom colors and size, then download as PNG. Instant and private.",
+      "keywords": "qr code generator, create qr code, qr code maker, free qr generator, custom qr code, qr code from url",
+      "short_desc": "Turn any URL or text into a custom, downloadable QR code.",
+      "lead": "Turn any URL, text, Wi-Fi details or contact info into a scannable QR code in seconds. Customize the size and colors, then download it as a PNG for print or digital use.",
+      "solves": "Create a scannable QR code from any text or URL without needing a designer or a paid service. It generates a standards-compliant QR code you can download and use in print, on packaging, or on screen.",
+      "how_works": "The QR code is generated locally in your browser using a standard QR encoding library. You enter your text or URL, choose a size and colors, and the tool builds the QR matrix and renders it to a canvas you can download as a PNG. Your content never leaves your device.",
+      "assumptions": "QR codes can hold up to a few thousand characters depending on the error-correction level; longer content makes the code denser and harder to scan. Very long text may need a URL shortener instead.",
+      "features": [
+        "Encode URLs, text, Wi-Fi and more",
+        "Custom size and foreground/background colors",
+        "Download as a high-resolution PNG"
+      ],
+      "how_to_use": [
+        "Type or paste your text or URL.",
+        "Adjust size and colors if you like.",
+        "Click Generate and download the PNG."
+      ],
+      "faq": [
+        {
+          "q": "What can I put in a QR code?",
+          "a": "Almost any text — website URLs, Wi-Fi credentials, contact details, plain text and more. Long content makes the code denser."
+        },
+        {
+          "q": "Are QR codes free to generate?",
+          "a": "Yes. This generator is completely free with no watermark and no account required."
+        },
+        {
+          "q": "Can I customize the colors?",
+          "a": "Yes. You can change the foreground and background colors. Keep enough contrast so scanners can read the code reliably."
+        },
+        {
+          "q": "Is my data sent to a server?",
+          "a": "No. The QR code is generated locally in your browser, so your content never leaves your device."
+        },
+        {
+          "q": "What size should I download for print?",
+          "a": "Download at the largest size available and scale down as needed. A QR code should be at least 2–3 cm in print to scan reliably."
         }
       ]
     }
