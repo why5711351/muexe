@@ -53,9 +53,10 @@
   bg.addEventListener('input', gen);
   size.addEventListener('input', gen);
 
-  // Load the QR encoding library, then generate if there is already input.
+  // Load the QR encoding library (local copy, no third-party CDN), then
+  // generate if there is already input.
   var script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js';
+  script.src = '/assets/js/qrcode.min.js';
   script.onload = function () { gen(); };
   document.head.appendChild(script);
 })();

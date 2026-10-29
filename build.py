@@ -632,6 +632,22 @@ def category_page(c) -> str:
     )
 
 
+def build_headers() -> str:
+    """Static asset caching rules for Cloudflare Pages.
+
+    Images are immutable (never change), CSS/JS get a 1-week cache so tweaks
+    propagate within a few days while still saving repeat-visitor bandwidth.
+    """
+    return (
+        "/assets/img/*\n"
+        "  Cache-Control: public, max-age=31536000, immutable\n\n"
+        "/assets/css/*\n"
+        "  Cache-Control: public, max-age=604800\n\n"
+        "/assets/js/*\n"
+        "  Cache-Control: public, max-age=604800\n"
+    )
+
+
 def build_redirects() -> str:
     """301 .html → clean URL for every page so old/crawled URLs collapse onto
     the canonical extensionless form (Cloudflare Pages also serves these
@@ -676,6 +692,7 @@ def main():
     (DIST / "robots.txt").write_text(build_robots(), encoding="utf-8")
     (DIST / "assets" / "search.json").write_text(build_search_index(), encoding="utf-8")
     (DIST / "_redirects").write_text(build_redirects(), encoding="utf-8")
+    (DIST / "_headers").write_text(build_headers(), encoding="utf-8")
     # IndexNow key file (verifies ownership for Bing/Yandex instant indexing)
     (DIST / f"{INDEXNOW_KEY}.txt").write_text(INDEXNOW_KEY + "\n", encoding="utf-8")
 
