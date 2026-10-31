@@ -6,8 +6,9 @@
   "ai": {
     "binding": "AI"
   },
-  "vars": {
-    "SUPADATA_API_KEY": "",
-    "CHOCO_API_KEY": "cd_live_8nDB6SqOCZyXAHTV0kiR4HzLn_40O2wb"
-  }
+  // API keys (CHOCO_API_KEY / SUPADATA_API_KEY) are encrypted Secrets in the
+  // Cloudflare dashboard: Settings -> Variables and Secrets. Do NOT declare
+  // them in "vars" here — this repo is public, and a Secret cannot share a
+  // name with an existing Variable (Cloudflare rejects the duplicate name).
+  "vars": {}
 }
